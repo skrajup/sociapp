@@ -1,0 +1,60 @@
+/* homepage styles */
+.custom-container {
+    width: 90%;
+    margin: auto;
+}
+
+.custom-flex {
+    height: 500px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.custom-flex > div {
+    flex-basis: 40%;
+    margin-left: 20px;
+}
+
+.footer {
+    height: 50px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: xx-small;
+}
+
+/* common style */
+.wid-80{
+    width: 80%;
+    margin: 50px auto;
+}
+
+/* home dashboard styles */
+.home-dashboard-content {
+    padding: 20px 100px;
+    text-align: center;
+}
+
+/* post-create-content */
+
+/* single-post-content */
+.post-head-content-flex {
+    display: flex;
+    padding-right: 10px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* 404-content */
+.page-404-content{
+    padding: 50px;
+    text-align: center;
+}
+
+.page-404-content > h1 {
+    font-size: 400%;
+}

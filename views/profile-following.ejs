@@ -1,0 +1,24 @@
+<%- include('partials/header') %>
+
+      <div class="home-profile-content wid-80">
+        <div class="user-details home-user-details">
+            <h1>{{USER PHOTO}} {{USER NAME}}</h1>
+        </div>
+        
+        <div class="user-posts home-user-posts">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Posts: {{POST-COUNT}</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Followers: {{FOLOOWERS-COUNT}}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Following: {{FOLOWING-COUNT}}</a>
+                </li>
+            </ul>
+        </div>
+        
+    </div>
+
+<%- include('partials/footer') %>
