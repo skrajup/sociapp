@@ -2,6 +2,7 @@ const express = require("express");
 const ejs = require("ejs");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const md5 = require("md5");//for level 3 security: hashing password
 
 const app = express();
 app.use(express.static("public"));
@@ -37,7 +38,7 @@ app.post("/signup", (req, res)=>{
     const newUser = new User({
         username: req.body.username,
         email: req.body.email,
-        password: req.body.password
+        password: md5(req.body.password)    //convert password into hash
     });
 
     newUser.save((err) => {
@@ -51,7 +52,7 @@ app.post("/signup", (req, res)=>{
 
 app.post("/signin", (req, res)=>{
     const username = req.body.username;
-    const password = req.body.password;
+    const password = md5(req.body.password);
     
     User.findOne({username: username}, (err, foundUser)=>{
         if(err){
