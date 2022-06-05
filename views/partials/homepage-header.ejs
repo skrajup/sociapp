@@ -16,13 +16,13 @@
       <nav class="navbar navbar-dark bg-dark">
         <div class="container-fluid">
           <a class="navbar-brand">SociApp</a>
-          <form class="flex">
+          <form class="flex" action="/signin" method="post">
             <div class="row">
               <div class="col">
-                <input type="text" class="form-control" placeholder="username">
+                <input type="text" id="username" name="username" class="form-control" placeholder="username">
               </div>
               <div class="col">
-                <input type="password" class="form-control" placeholder="password">
+                <input type="password" id="password" name="password" class="form-control" placeholder="password">
               </div>
               <div class="col">
                 <button class="btn btn-primary" type="submit">Sign In</button>
