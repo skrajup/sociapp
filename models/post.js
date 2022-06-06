@@ -33,8 +33,8 @@ const postSchema =  new mongoose.Schema({
                             required: true
                         },
                         postedOn: {
-                            type: Date,
-                            default: Date.now(),
+                            type: String,
+                            default: new Date().toLocaleDateString(),
                             required: true
                         },
                         comments: [commentSchema]

@@ -1,24 +1,18 @@
 <%- include('partials/header') %>
 
-      <div class="home-profile-content wid-80">
-        <div class="user-details home-user-details">
-            <h1>{{USER PHOTO}} {{USER NAME}}</h1>
-        </div>
-        
-        <div class="user-posts home-user-posts">
-            <ul class="nav nav-tabs">
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Posts: {{POST-COUNT}</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Followers: {{FOLOOWERS-COUNT}}</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Following: {{FOLOWING-COUNT}}</a>
-                </li>
-            </ul>
-        </div>
-        
-    </div>
+      <%- include('partials/profileHead')%>
+            <div class="user-following-container">
+              <% if(user.following.length === 0){ %>
+                <h1 style="font-size: 300%; text-align: center; margin-top: 10%; color: rgb(79, 79, 79);">You don't follow anyone!!!
+                  </h1>
+              <% }else{ %>
+                <% user.following.forEach(following=>{  %>
+                  <div class="user-following">
+                    <h5><%=following.username%></h5>
+                  </div>
+                <% }) %>
+              <% } %>
+            </div>
+      <%- include('partials/profileFoot')%>
 
 <%- include('partials/footer') %>

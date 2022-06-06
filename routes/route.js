@@ -3,6 +3,7 @@ const passport = require("passport");// authentication
 const connectEnsureLogin = require('connect-ensure-login');// authorization
 const User = require("../models/user"); //User model
 const { Post } = require("../models/post"); //Post model
+const user = require("../models/user");
 const router = express.Router();
 
 // all home routes
@@ -37,7 +38,7 @@ router.post("/signin", passport.authenticate("local", { successReturnToOrRedirec
 
 
 // after sign in
-// all dashboard routes
+// all dashboard routes--------------------------------------------------------------
 router.get("/dashboard", connectEnsureLogin.ensureLoggedIn("/"), (req, res)=>{
     // The below line was added so we couldn't display the "/home-dashboard" page
     // after we logged out using the "back" button of the browser, which
@@ -47,7 +48,7 @@ router.get("/dashboard", connectEnsureLogin.ensureLoggedIn("/"), (req, res)=>{
         'Cache-Control',
         'no-cache, private, no-store, must-revalidate, max-stal e=0, post-check=0, pre-check=0'
     );
-    res.render("dashboard");
+    res.render("dashboard", {user: req.user});
 });
 
 router.get("/dashboard/create", connectEnsureLogin.ensureLoggedIn("/"), (req, res)=>{
@@ -59,7 +60,7 @@ router.get("/dashboard/create", connectEnsureLogin.ensureLoggedIn("/"), (req, re
 });
 
 router.post("/dashboard/create", connectEnsureLogin.ensureLoggedIn("/"), (req, res)=>{
-    console.log(req.user);
+    // console.log(req.user);
     res.set(
         'Cache-Control',
         'no-cache, private, no-store, must-revalidate, max-stal e=0, post-check=0, pre-check=0'
@@ -67,7 +68,7 @@ router.post("/dashboard/create", connectEnsureLogin.ensureLoggedIn("/"), (req, r
     const newPost = new Post({
         title: req.body.title,
         body: req.body.postContent,
-        postedOn: Date.now()
+        postedOn: new Date().toLocaleDateString()
     });
 
     newPost.save((err)=>{
@@ -88,7 +89,26 @@ router.get("/dashboard/profile", connectEnsureLogin.ensureLoggedIn("/"), (req, r
         'Cache-Control',
         'no-cache, private, no-store, must-revalidate, max-stal e=0, post-check=0, pre-check=0'
     );
-    res.render("profile");
+   
+    res.render("profile", {user: req.user, classes: ["active", "", ""]});
+});
+
+// dashboard/profile routes
+router.get("/dashboard/profile/followers", connectEnsureLogin.ensureLoggedIn("/"), (req, res)=>{
+    // console.log(req);
+    res.set(
+        'Cache-Control',
+        'no-cache, private, no-store, must-revalidate, max-stal e=0, post-check=0, pre-check=0'
+    );
+    res.render("profile-followers.ejs", {user: req.user, classes: ["", "active", ""]});
+});
+
+router.get("/dashboard/profile/following", connectEnsureLogin.ensureLoggedIn("/"), (req, res)=>{
+    res.set(
+        'Cache-Control',
+        'no-cache, private, no-store, must-revalidate, max-stal e=0, post-check=0, pre-check=0'
+    );
+    res.render("profile-following.ejs", {user: req.user, classes: ["", "", "active"]});
 });
 
 module.exports = router;

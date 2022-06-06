@@ -1,24 +1,21 @@
 <%- include('partials/header') %>
 
-      <div class="home-profile-content wid-80">
-        <div class="user-details home-user-details">
-            <h1>{{USER PHOTO}} {{USER NAME}}</h1>
-        </div>
-        
-        <div class="user-posts home-user-posts">
-            <ul class="nav nav-tabs">
-                <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="#">Posts: {{POST-COUNT}</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Followers: {{FOLOOWERS-COUNT}}</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Following: {{FOLOWING-COUNT}}</a>
-                </li>
-            </ul>
-        </div>
-        
-    </div>
+      <%- include('partials/profileHead')%>
+            <div class="user-posts-flex-container">
+              <% if(user.posts.length === 0){  %>
+                  <h1 style="font-size: 300%; text-align: center; margin-top: 10%; color: rgb(79, 79, 79);"><i class="fa fa-battery-quarter" style="color: red;" aria-hidden="true"></i></br>You have not created any post yet!!!
+                  <br><a href="/dashboard/create" class="btn btn-success btn-sm me-md-2" type="button">Create a post</a></h1>
+                  
+              <% }else{  %>
+                <% user.posts.forEach(post=>{  %>
+                    <div class="user-post">
+                      <h5><%=post.title.substr(0, 27)+"..."%></h5>
+                      <p><small><%=post.body.substr(0, 80)+"......" %></small></p>
+                      <p><b>Posted by </b><%=user.username%> on <%=post.postedOn%> </p>
+                    </div>
+                  <% }) %>
+                <% }  %>
+            </div>
+      <%- include('partials/profileFoot')%>
 
 <%- include('partials/footer') %>

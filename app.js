@@ -11,7 +11,8 @@ const routes = require("./routes/route"); //import routes
 const app = express();
 app.use(express.static("public"));
 // To create a virtual path prefix (where the path does not actually exist in the file system) for files that are served by the express.static function, specify a mount path for the static directory, as shown below:
-app.use('/dashboard', express.static('public'))
+app.use('/dashboard', express.static('public'));
+app.use('/dashboard/profile', express.static('public'));
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({
     extended: true

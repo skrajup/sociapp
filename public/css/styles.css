@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif&display=swap');
+
+body {
+    font-family: 'Noto Serif', serif;
+}
+
 /* homepage styles */
 .custom-container {
     width: 90%;
@@ -57,4 +63,32 @@
 
 .page-404-content > h1 {
     font-size: 400%;
+}
+
+/* profile page post section */
+.user-posts-flex-container {
+    height: 500px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    overflow-y: scroll;
+}
+
+.user-post {
+    height: 150px;
+    margin: 10px auto;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    flex-basis: 40%;
+    word-break: break-all;
+    overflow: hidden;
+}
+
+.user-post:hover {
+    background: rgb(0, 0, 0);
+    color: #fff;
+    cursor: pointer;
 }
