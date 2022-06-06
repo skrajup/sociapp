@@ -1,86 +1,49 @@
-const express = require("express");
-const ejs = require("ejs");
-const bodyParser = require("body-parser");
-const mongoose = require("mongoose");
-const bcrypt = require("bcrypt");//hashing and salting : level 4 security
-const saltRounds = 10;
+require("dotenv").config();
+require("./dbConnection/dbConnect")();// establish database connection
+const express = require("express");// server software
+const ejs = require("ejs");//template engine
+const bodyParser = require("body-parser"); // parser middleware
+const session = require("express-session"); // session middleware
+const passport = require("passport");// authentication
+const User = require("./models/user"); //import User model
+const routes = require("./routes/route"); //import routes
 
 const app = express();
 app.use(express.static("public"));
+// To create a virtual path prefix (where the path does not actually exist in the file system) for files that are served by the express.static function, specify a mount path for the static directory, as shown below:
+app.use('/dashboard', express.static('public'))
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({
     extended: true
 }));
 
-mongoose.connect("mongodb://localhost:27017/sociappDB", {useNewUrlParser: true});
+// Configure Sessions Middleware
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true
+}));
 
-const userSchema = new mongoose.Schema({
-    username: String,
-    email: String,
-    password: String,
+// Configure More Middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
+//passport local strategy
+passport.use(User.createStrategy());
+
+//so we have update serialization and deserialization which will work for any type of Strategy from passport documentation
+passport.serializeUser(function(user, done) {
+    done(null, user.id);
 });
-
-const User = new mongoose.model("User", userSchema);
-
-app.get("/", (req, res)=>{
-    res.render("homepage");
-});
-
-app.get("/create-post", (req, res)=>{
-    res.render("create-post");
-})
-
-app.get("/profile", (req, res)=>{
-    res.render("profile");
-})
-
-
-app.post("/signup", (req, res)=>{
-    bcrypt.hash(req.body.password, saltRounds)
-    .then(function(hash){
-        const newUser = new User({
-            username: req.body.username,
-            email: req.body.email,
-            password: hash
-        });
-        
-        newUser.save((err) => {
-            if(err){
-                console.log(err);
-            }else{
-                res.render("home-dashboard");
-            }
-        });
-    })
-    .catch(function(err){
-        console.log(err);
+  
+passport.deserializeUser(function(id, done) {
+    User.findById(id, function (err, user) {
+        done(err, user);
     });
 });
 
-app.post("/signin", (req, res)=>{
-    const username = req.body.username;
-    const password = req.body.password;
-    
-    User.findOne({username: username}, (err, foundUser)=>{
-        if(err){
-            console.log(err);
-        }else{
-            if(foundUser){
-                bcrypt.compare(password, foundUser.password)
-                .then(function (result) {  
-                    if(result === true){
-                        res.render("home-dashboard");
-                    }else{
-                        res.redirect("/");
-                    }
-                })
-                .catch(function(err){
-                    console.log(err);
-                });
-            }
-        }
-    });
-});
+// routes
+app.use("/", routes);
 
 app.listen(3000, ()=>{
     console.log("the app is running on port 3000");
