@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema({
     },
     posts: {
         type: [postSchema]
-    },
+    },  
     followers: {
         type: [new mongoose.Schema({username: String, posts: {type: [postSchema]}})]
     },

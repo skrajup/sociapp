@@ -1,9 +1,9 @@
 const express = require("express");
+const { ObjectId } = require("mongodb");
 const passport = require("passport");// authentication
 const connectEnsureLogin = require('connect-ensure-login');// authorization
 const User = require("../models/user"); //User model
-const { Post } = require("../models/post"); //Post model
-const user = require("../models/user");
+const { Post, Commenter, Comment } = require("../models/post"); //Post model
 const router = express.Router();
 
 // all home routes
@@ -68,20 +68,21 @@ router.post("/dashboard/create", connectEnsureLogin.ensureLoggedIn("/"), (req, r
     const newPost = new Post({
         title: req.body.title,
         body: req.body.postContent,
-        postedOn: new Date().toLocaleDateString()
+        postedOn: new Date().toLocaleDateString(),
+        postedBy: req.user._id
     });
+    // console.log(newPost);
 
     newPost.save((err)=>{
         if(err){
             console.log(err);
+            res.redirect("back");
         }else{
             // console.log(newPost);
-            res.redirect("/dashboard");
+            req.user.posts.push(newPost);
+            req.user.save().then(()=>{res.redirect("/dashboard/profile");}).catch(err=>{console.log(err);});
         }
     });
-
-    req.user.posts.push(newPost);
-    req.user.save();
 });
 
 router.get("/dashboard/profile", connectEnsureLogin.ensureLoggedIn("/"), (req, res)=>{
@@ -111,4 +112,212 @@ router.get("/dashboard/profile/following", connectEnsureLogin.ensureLoggedIn("/"
     res.render("profile-following.ejs", {user: req.user, classes: ["", "", "active"]});
 });
 
+// posts routes
+router.get("/posts/:id", connectEnsureLogin.ensureLoggedIn("/"), (req, res)=>{
+    res.set(
+        'Cache-Control',
+        'no-cache, private, no-store, must-revalidate, max-stal e=0, post-check=0, pre-check=0'
+    );
+    
+    if(!ObjectId.isValid(req.params.id)){
+        res.render("404.ejs");
+    }else{
+        Post.findOne({_id: ObjectId(req.params.id)}, (err, post)=>{
+            if(err){
+                console.log(err);
+                res.render("404.ejs");
+            }else{
+                if(post){
+                    User.findOne({_id: post.postedBy})
+                    .then(user=>{
+                        res.render("single-post-screen.ejs", {post: post, username: user.username});
+                    })
+                    .catch(err=>{
+                        console.log(err);   
+                    });
+                }else{
+                    res.render("404.ejs"); 
+                }
+            }
+        });
+    }
+    
+});
+
+router.get("/posts/:id/update", connectEnsureLogin.ensureLoggedIn("/"), (req, res)=>{
+    res.set(
+        'Cache-Control',
+        'no-cache, private, no-store, must-revalidate, max-stal e=0, post-check=0, pre-check=0'
+    );
+
+    if(!ObjectId.isValid(req.params.id)){
+        res.render("404.ejs");
+    }else{
+        Post.findOne({_id: ObjectId(req.params.id)}, (err, post)=>{
+            if(err){
+                console.log(err);
+                res.render("404.ejs");
+            }else{
+                if(post){
+                    res.render("edit-post.ejs", {post: post});
+                }else{
+                    res.render("404.ejs"); 
+                }
+            }
+        });
+    }
+});
+
+router.post("/posts/:id/update", connectEnsureLogin.ensureLoggedIn("/"), (req, res)=>{
+    res.set(
+        'Cache-Control',
+        'no-cache, private, no-store, must-revalidate, max-stal e=0, post-check=0, pre-check=0'
+    );
+
+    Post.updateOne({_id: ObjectId(req.params.id)}, {title: req.body.title, body: req.body.postContent})
+    .then(updatedDocs=>{
+        // also update in user posts 
+        var index = req.user.posts.findIndex((post)=>(post._id).toString() === req.params.id);
+        Post.findOne({_id: ObjectId(req.params.id)})
+        .then(updatedPost=>{
+            if(updatedPost){
+                req.user.posts[index] = updatedPost;
+                req.user.save()
+                .then(()=>{
+                    res.redirect("/dashboard/profile");
+                })
+                .catch(err=>{
+                    console.log(err);
+                    res.render("404");
+                });
+            }
+        })
+        .catch(err=>{
+            console.log(err);
+            res.render("404");
+        }); 
+    })
+    .catch(err=>{
+        console.log(err);
+        res.render("404");
+    });
+});
+
+router.get("/posts/:id/delete", connectEnsureLogin.ensureLoggedIn("/"), (req, res)=>{
+    res.set(
+        'Cache-Control',
+        'no-cache, private, no-store, must-revalidate, max-stal e=0, post-check=0, pre-check=0'
+    );
+
+    if(!ObjectId.isValid(req.params.id)){
+        res.render("404.ejs");
+    }else{
+        Post.findOne({_id: ObjectId(req.params.id)}, (err, post)=>{
+            if(err){
+                console.log(err);
+                res.render("404.ejs");
+            }else{
+                if(post){
+                    // delete from user database by using post id
+                    const index = req.user.posts.findIndex((post)=>{return (post._id).toString()===req.params.id;});
+                    req.user.posts.splice(index, 1);
+                    
+                    req.user.save()
+                    .then(()=>{
+                        // delete from posts database
+                        Post.deleteOne({_id: ObjectId(req.params.id)})
+                        .then(()=>{
+                            res.redirect("/dashboard/profile");
+                        })
+                        .catch(err=>{
+                            console.log(err);
+                            res.render("404.ejs"); 
+                        });
+                    })
+                    .catch(err=>{
+                        console.log(err);
+                        res.render("404.ejs"); 
+                    });
+                    
+                }else{
+                    res.render("404.ejs"); 
+                }
+            }
+        });
+    }  
+});
+
+router.post("/posts/:id/post_comment", connectEnsureLogin.ensureLoggedIn("/"), (req, res)=>{
+    res.set(
+        'Cache-Control',
+        'no-cache, private, no-store, must-revalidate, max-stal e=0, post-check=0, pre-check=0'
+    );
+
+    const commenter = new Commenter({
+        username: req.user.username,
+        email: req.user.email,
+        time: new Date().toLocaleDateString(),
+        userId: ObjectId(req.user.id)
+    });
+
+    const comment = new Comment({
+        user: commenter,
+        body: req.body.commentBody
+    });
+
+    if(!ObjectId.isValid(req.params.id)){
+        res.render("404.ejs");
+    }else{
+        commenter.save().then(()=>{
+            comment.save().then(()=>{
+                Post.findByIdAndUpdate(ObjectId(req.params.id), {"$push": {comments: comment}}, {"new": true})
+                .then((updatedPost)=>{
+                    // console.log(updatedPost);
+                    User.findOne({_id: updatedPost.postedBy})
+                    .then(foundUser=>{
+                        // console.log(foundUser);
+                        var index = foundUser.posts.findIndex(post=>{return (post._id).toString() === req.params.id;});
+                        foundUser.posts[index] = updatedPost;
+                        foundUser.save().then(()=>{res.redirect("back");}).catch(err=>{console.log(err); res.render("404");});
+                    }).catch(err=>{console.log(err); res.render("404");});
+                }).catch(err=>{console.log(err); res.render("404");});
+            }).catch(err=>{console.log(err); res.render("404");});
+        }).catch(err=>{console.log(err); res.render("404");});
+    }
+});
+
 module.exports = router;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,3 +1,4 @@
+const { ObjectId } = require("mongodb");
 const mongoose = require("mongoose");
 // const passportLocalMongoose = require("passport-local-mongoose");
 
@@ -6,9 +7,10 @@ const commenterSchema = new mongoose.Schema({
                             username: String,
                             email: String,
                             time: {
-                                type: Date,
-                                default: Date.now()
-                            }
+                                type: String
+                                // default: Date.now()
+                            },
+                            userId: mongoose.ObjectId
                         });
 
 
@@ -16,7 +18,8 @@ const commentSchema =   new mongoose.Schema({
                             user: commenterSchema,
                             body: {
                                 type: String,
-                                minlength: 5
+                                minlength: 5,
+                                required: true
                             } 
                         });
 
@@ -34,7 +37,11 @@ const postSchema =  new mongoose.Schema({
                         },
                         postedOn: {
                             type: String,
-                            default: new Date().toLocaleDateString(),
+                            // default: new Date().toLocaleDateString(),
+                            required: true
+                        },
+                        postedBy: {
+                            type: mongoose.ObjectId,
                             required: true
                         },
                         comments: [commentSchema]
@@ -47,9 +54,11 @@ const postSchema =  new mongoose.Schema({
 
 //models
 const Post = new mongoose.model("Post", postSchema);
+const Comment = new mongoose.model("Comment", commentSchema);
+const Commenter = new mongoose.model("Commenter", commenterSchema);
 
 //export schemas
 module.exports = { commenterSchema, commentSchema, postSchema };
 
 //export models
-module.exports = { Post };
+module.exports = { Post, Comment, Commenter };

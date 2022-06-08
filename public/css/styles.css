@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Assistant:wght@300&display=swap');
 
 body {
-    font-family: 'Noto Serif', serif;
+    font-family: 'Assistant', sans-serif;
 }
 
 /* homepage styles */
@@ -55,6 +55,37 @@ body {
     align-items: center;
 }
 
+.post-head-left {
+    flex-basis: 70%;
+    word-break: break-all;
+}
+
+.post-head-right{
+    flex-basis: 20%;
+}
+
+.post-body-content {
+    word-wrap: break-word;
+}
+
+a {
+    text-decoration: none;
+    color: rgb(255, 0, 0);
+}
+
+.post-writer-name {
+    color: rgb(0, 109, 163);
+}
+
+.edit {
+    font-size: x-large;
+    color: rgb(3, 3, 61);
+}
+
+.delete {
+    font-size: x-large;
+}
+
 /* 404-content */
 .page-404-content{
     padding: 50px;
@@ -66,29 +97,40 @@ body {
 }
 
 /* profile page post section */
-.user-posts-flex-container {
+.user-posts-container {
     height: 500px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    align-items: flex-start;
     overflow-y: scroll;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.user-posts-container::-webkit-scrollbar {
+    display: none;
 }
 
 .user-post {
     height: 150px;
-    margin: 10px auto;
+    margin: 10px 0;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 10px;
-    flex-basis: 40%;
     word-break: break-all;
     overflow: hidden;
 }
 
-.user-post:hover {
-    background: rgb(0, 0, 0);
-    color: #fff;
+.user-post > h5 > a{
+    text-decoration: none;
+    color: #1d2a57;
+    font-weight: 700;
     cursor: pointer;
 }
+
+.user-post:hover {
+    background: rgb(228, 228, 228);
+    color: rgb(0, 0, 0);
+}
+
+
+
+/* .user-post > h5 > a:hover{
+    color: #fff;
+} */

@@ -1,14 +1,14 @@
 <%- include('partials/header') %>
 
         <div class="post-update-content wid-80">
-            <form action="" method="">
+            <form action="/posts/<%=post._id%>/update" method="post">
                 <div class="mb-3">
                     <label for="title" class="form-label">Title</label>
-                    <input type="text" class="form-control" id="title" name="title">
+                    <input type="text" class="form-control" id="title" name="title" value="<%=post.title%>">
                 </div>
                 <div class="mb-3">
                     <label for="postContent" class="form-label">Post Content</label>
-                    <textarea class="form-control" id="postContent" name="postContent" rows="10"></textarea>
+                    <textarea class="form-control" id="postContent" name="postContent" rows="10" value="sss"><%=post.body%></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary">Save Changes</button>
             </form>
