@@ -1,11 +1,11 @@
 <%- include('partials/header') %>
 
       <%- include('partials/profileHead')%>
+        
             <div class="user-posts-container">
               <% if(user.posts.length === 0){  %>
-                  <h1 style="font-size: 300%; text-align: center; margin-top: 10%; color: rgb(79, 79, 79);"><i class="fa fa-battery-quarter" style="color: red;" aria-hidden="true"></i></br>You have not created any post yet!!!
-                  <br><a href="/dashboard/create" class="btn btn-success btn-sm me-md-2" type="button">Create a post</a></h1>
-                  
+                  <h1 style="font-size: 300%; text-align: center; margin-top: 10%; color: rgb(79, 79, 79);">No posts yet!!!<br><a href="/dashboard/create" class="btn btn-success btn-sm me-md-2" type="button">Create a post</a>
+                  </h1>
               <% }else{  %>
                 <% user.posts.slice().reverse().forEach(post=>{  %>
                     <div class="user-post">
@@ -16,6 +16,7 @@
                   <% }) %>
                 <% }  %>
             </div>
+          
       <%- include('partials/profileFoot')%>
 
 <%- include('partials/footer') %>

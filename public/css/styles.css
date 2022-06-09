@@ -1,7 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Assistant:wght@300&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Assistant:wght@300&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
 
 body {
-    font-family: 'Assistant', sans-serif;
+    /* font-family: 'Assistant', sans-serif; */
+    font-family: 'Nunito', sans-serif;
 }
 
 /* homepage styles */
@@ -98,7 +100,7 @@ a {
 
 /* profile page post section */
 .user-posts-container {
-    height: 500px;
+    /* height: 500px; */
     overflow-y: scroll;
 }
 
@@ -108,7 +110,7 @@ a {
 }
 
 .user-post {
-    height: 150px;
+    height: 170px;
     margin: 10px 0;
     padding: 10px;
     border: 1px solid #ccc;
@@ -124,8 +126,12 @@ a {
     cursor: pointer;
 }
 
+.user-post > h5 > a:hover{
+    color: #0800efc5;
+}
+
 .user-post:hover {
-    background: rgb(228, 228, 228);
+    background: rgba(72, 92, 0, 0.231);
     color: rgb(0, 0, 0);
 }
 

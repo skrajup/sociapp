@@ -15,6 +15,7 @@ app.use('/dashboard', express.static('public'));
 app.use('/dashboard/profile', express.static('public'));
 app.use('/posts', express.static('public'));
 app.use('/posts/:id', express.static('public'));
+app.use('/users', express.static('public'));
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({
     extended: true

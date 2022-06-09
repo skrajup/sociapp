@@ -91,7 +91,7 @@ router.get("/dashboard/profile", connectEnsureLogin.ensureLoggedIn("/"), (req, r
         'no-cache, private, no-store, must-revalidate, max-stal e=0, post-check=0, pre-check=0'
     );
    
-    res.render("profile", {user: req.user, classes: ["active", "", ""]});
+    res.render("profile", {user: req.user, classes: ["active", "", ""], loggedId: req.user._id});
 });
 
 // dashboard/profile routes
@@ -101,7 +101,7 @@ router.get("/dashboard/profile/followers", connectEnsureLogin.ensureLoggedIn("/"
         'Cache-Control',
         'no-cache, private, no-store, must-revalidate, max-stal e=0, post-check=0, pre-check=0'
     );
-    res.render("profile-followers.ejs", {user: req.user, classes: ["", "active", ""]});
+    res.render("profile-followers.ejs", {user: req.user, classes: ["", "active", ""], loggedId: req.user._id});
 });
 
 router.get("/dashboard/profile/following", connectEnsureLogin.ensureLoggedIn("/"), (req, res)=>{
@@ -109,7 +109,7 @@ router.get("/dashboard/profile/following", connectEnsureLogin.ensureLoggedIn("/"
         'Cache-Control',
         'no-cache, private, no-store, must-revalidate, max-stal e=0, post-check=0, pre-check=0'
     );
-    res.render("profile-following.ejs", {user: req.user, classes: ["", "", "active"]});
+    res.render("profile-following.ejs", {user: req.user, classes: ["", "", "active"], loggedId: req.user._id});
 });
 
 // posts routes
@@ -130,7 +130,7 @@ router.get("/posts/:id", connectEnsureLogin.ensureLoggedIn("/"), (req, res)=>{
                 if(post){
                     User.findOne({_id: post.postedBy})
                     .then(user=>{
-                        res.render("single-post-screen.ejs", {post: post, username: user.username});
+                        res.render("single-post-screen.ejs", {post: post, poster_name: user.username, loggedId: req.user._id});
                     })
                     .catch(err=>{
                         console.log(err);   
@@ -268,21 +268,39 @@ router.post("/posts/:id/post_comment", connectEnsureLogin.ensureLoggedIn("/"), (
     if(!ObjectId.isValid(req.params.id)){
         res.render("404.ejs");
     }else{
-        commenter.save().then(()=>{
-            comment.save().then(()=>{
-                Post.findByIdAndUpdate(ObjectId(req.params.id), {"$push": {comments: comment}}, {"new": true})
-                .then((updatedPost)=>{
-                    // console.log(updatedPost);
-                    User.findOne({_id: updatedPost.postedBy})
-                    .then(foundUser=>{
-                        // console.log(foundUser);
-                        var index = foundUser.posts.findIndex(post=>{return (post._id).toString() === req.params.id;});
-                        foundUser.posts[index] = updatedPost;
-                        foundUser.save().then(()=>{res.redirect("back");}).catch(err=>{console.log(err); res.render("404");});
-                    }).catch(err=>{console.log(err); res.render("404");});
+        comment.save().then(()=>{
+            Post.findByIdAndUpdate(ObjectId(req.params.id), {"$push": {comments: comment}}, {"new": true})
+            .then((updatedPost)=>{
+                // console.log(updatedPost);
+                User.findOne({_id: updatedPost.postedBy})
+                .then(foundUser=>{
+                    // console.log(foundUser);
+                    var index = foundUser.posts.findIndex(post=>{return (post._id).toString() === req.params.id;});
+                    foundUser.posts[index] = updatedPost;
+                    foundUser.save().then(()=>{res.redirect("back");}).catch(err=>{console.log(err); res.render("404");});
                 }).catch(err=>{console.log(err); res.render("404");});
             }).catch(err=>{console.log(err); res.render("404");});
-        }).catch(err=>{console.log(err); res.render("404");});
+        }).catch(err=>{console.log(err); res.redirect("back");});
+    }
+});
+
+// /users/:id: users route
+router.get("/users/:id", connectEnsureLogin.ensureLoggedIn("/"), (req, res)=>{
+    if(!ObjectId.isValid(req.params.id)){
+        res.render("404");
+    }else{
+        if((req.user._id).toString() === req.params.id){
+            res.redirect("/dashboard/profile");
+        }else{
+            User.findOne({_id: ObjectId(req.params.id)})
+            .then(foundUser=>{
+                res.render("home-guest", {user: foundUser});
+            })
+            .then(err=>{
+                console.log(err);
+                res.render("404");
+            });
+        }
     }
 });
 
