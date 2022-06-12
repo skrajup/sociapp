@@ -12,7 +12,7 @@ const users_id_get = (req, res)=>{
             User.findOne({_id: ObjectId(req.params.id)})
             .then(foundUser=>{
                 if(foundUser){
-                    res.render("home-guest", {user: foundUser, successMsg: req.flash("successMsg"), errorMsg: req.flash("errorMsg")});
+                    res.render("home-guest", {user: req.user, foundUser: foundUser, successMsg: req.flash("successMsg"), errorMsg: req.flash("errorMsg")});
                 }else{
                     req.flash("errorMsg", "Requested user does not exist!!!");
                     res.redirect("/404");
