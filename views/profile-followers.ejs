@@ -1,6 +1,17 @@
 <%- include('partials/header') %>
 
     <%- include('partials/profileHead')%> 
+          <%  if(successMsg.length!=0){ %>
+            <div class="message success-message">
+              <p class="message-content"><%=successMsg%></p>
+            </div>
+          <% } %>
+
+          <%  if(errorMsg.length!=0){ %>
+            <div class="message error-message">
+              <p class="message-content"><%=errorMsg%></p>
+            </div>
+          <% } %>
           
           <div class="user-followers-container">
             <% if(user.followers.length === 0){ %>

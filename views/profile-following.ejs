@@ -1,6 +1,19 @@
 <%- include('partials/header') %>
 
       <%- include('partials/profileHead')%>
+
+            <%  if(successMsg.length!=0){ %>
+              <div class="message success-message">
+                <p class="message-content"><%=successMsg%></p>
+              </div>
+            <% } %>
+
+            <%  if(errorMsg.length!=0){ %>
+              <div class="message error-message">
+                <p class="message-content"><%=errorMsg%></p>
+              </div>
+            <% } %>
+
             <div class="user-following-container">
               <% if(user.following.length === 0){ %>
                 <h1 style="font-size: 300%; text-align: center; margin-top: 10%; color: rgb(79, 79, 79);">You don't follow anyone!!!

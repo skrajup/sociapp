@@ -75,17 +75,26 @@ a {
     color: rgb(255, 0, 0);
 }
 
+
 .post-writer-name {
     color: rgb(0, 109, 163);
 }
 
 .edit {
+    padding: 5px 10px;
     font-size: x-large;
     color: rgb(3, 3, 61);
 }
 
 .delete {
+    padding: 5px 10px;
     font-size: x-large;
+}
+
+.delete:hover {
+    background: #ccc;
+    border-radius: 50%;
+    transition: 0.3s ease-in;
 }
 
 /* 404-content */
@@ -96,6 +105,11 @@ a {
 
 .page-404-content > h1 {
     font-size: 400%;
+}
+
+/* profile image */
+.profile-img {
+    border-radius: 50%;
 }
 
 /* profile page post section */
@@ -115,6 +129,7 @@ a {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 10px;
+    opacity: 1;
     word-break: break-all;
     overflow: hidden;
 }
@@ -127,16 +142,33 @@ a {
 }
 
 .user-post > h5 > a:hover{
-    color: #0800efc5;
+    color: #04006cc5;
 }
 
 .user-post:hover {
-    background: rgba(72, 92, 0, 0.231);
-    color: rgb(0, 0, 0);
+    color: #1d5d00;
+    background:#fff;
 }
 
+/* message, error message, success message */
+.message {
+    position: absolute;
+    top: 80%;
+    width: 50%;
+    text-align: center;
+    padding: 10px;
+}
+.success-message {
+    background: #16a100;
+    color: rgb(245, 245, 245);
+}
 
+.message-content {
+    margin-bottom: 0;
+    font-weight: 700;
+}
 
-/* .user-post > h5 > a:hover{
-    color: #fff;
-} */
+.error-message {
+    background: #a10000;
+    color: rgb(245, 245, 245);
+}

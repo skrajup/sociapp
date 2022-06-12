@@ -1,4 +1,6 @@
 why comment body is not required......?
 sol:- first save comment then it will validate
 
+[guest page head appears without login]
+
 implement search feature and remove error, header sent after client ......

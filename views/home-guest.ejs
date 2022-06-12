@@ -1,8 +1,20 @@
 <%- include('partials/header') %>
+  <%  if(successMsg.length!=0){ %>
+    <div class="message success-message">
+      <p class="message-content"><%=successMsg%></p>
+    </div>
+  <% } %>
+
+  <%  if(errorMsg.length!=0){ %>
+    <div class="message error-message">
+      <p class="message-content"><%=errorMsg%></p>
+    </div>
+  <% } %>
 
 <div class="home-profile-content wid-80">
   <div class="user-details home-user-details">
-      <h1><i class="fa fa-user" aria-hidden="true"></i> <%=user.username%></h1>
+      <h1><img class="profile-img" src="//www.gravatar.com/avatar/<%=user.emailHash%>?d=monsterid" alt="guest-img"> <%=user.username%></h1>
+      <!-- <i class="fa fa-user" aria-hidden="true"></i> -->
       <a href="#" type="button" class="btn btn-primary btn-sm btn-block">Follow+</a>
   </div>
     <br>

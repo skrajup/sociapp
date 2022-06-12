@@ -16,6 +16,9 @@ const userSchema = new mongoose.Schema({
         type: String,
         minlength: 8
     },
+    emailHash: {
+        type: String
+    },
     posts: {
         type: [postSchema]
     },  

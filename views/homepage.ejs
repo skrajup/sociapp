@@ -1,5 +1,17 @@
 <%- include('partials/homepage-header') %>
 
+      <% if(successMsg.length!=0){ %>
+        <div class="message success-message">
+          <p class="message-content"><%=successMsg%></p>
+        </div>
+      <% } %>
+
+      <%  if(errorMsg.length!=0){ %>
+        <div class="message error-message">
+          <p class="message-content"><%=errorMsg%></p>
+        </div>
+      <% } %>
+
       <div class="custom-flex">
         <div>
           <a class="btn btn-block btn-social btn-google" href="/auth/google" role="button">
@@ -26,5 +38,7 @@
           </form>
         </div>
       </div>
+
+      
 
 <%- include('partials/footer') %>
