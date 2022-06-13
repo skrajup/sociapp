@@ -15,15 +15,15 @@
           
           <div class="user-followers-container">
             <% if(user.followers.length === 0){ %>
-              <h1 style="font-size: 300%; text-align: center; margin-top: 10%; color: rgb(79, 79, 79);">You have not any follower yet!!!
+              <h1 style="font-size: 300%; text-align: center; margin-top: 10%; color: rgb(79, 79, 79);"><i class="fa fa-frown" aria-hidden="true"></i><br>No followers
                 </h1>
             <% }else{ %>
-              <% user.followers.forEach(follower=>{  %>
-                <div class="user-follower">
-                  <h5><%=follower.username%></h5>
-                </div>
-              <% }) %>
-            <% } %>
+            <ul class="list-group list-group-flush">
+              <% user.followers.forEach(user=>{ %>
+                <li class="list-group-item"><a class="followering-profiles" href="/users/<%=user.userId%>"><img class="profile-img" src="//www.gravatar.com/avatar/<%=user.emailHash%>?d=monsterid&s=35" alt=""> <%=user.username%></a></li>
+              <% }); %>
+            </ul>
+            <% } %> 
           </div>
     <%- include('partials/profileFoot')%>
 

@@ -1,4 +1,5 @@
 const { Post } = require("../models/post"); //Post model
+const user = require("../models/user");
 
 
 const dashboard_index = (req, res)=>{
@@ -67,6 +68,7 @@ const dashboard_profile_followers_get = (req, res)=>{
         'Cache-Control',
         'no-cache, private, no-store, must-revalidate, max-stal e=0, post-check=0, pre-check=0'
     );
+    
     res.render("profile-followers.ejs", {user: req.user, classes: ["", "active", ""], loggedId: req.user._id, successMsg: req.flash("successMsg"), errorMsg: req.flash("errorMsg")});
 }
 
@@ -75,6 +77,7 @@ const dashboard_profile_following_get = (req, res)=>{
         'Cache-Control',
         'no-cache, private, no-store, must-revalidate, max-stal e=0, post-check=0, pre-check=0'
     );
+    
     res.render("profile-following.ejs", {user: req.user, classes: ["", "", "active"], loggedId: req.user._id, successMsg: req.flash("successMsg"), errorMsg: req.flash("errorMsg")});
 }
 

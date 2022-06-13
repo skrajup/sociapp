@@ -23,10 +23,10 @@ const userSchema = new mongoose.Schema({
         type: [postSchema]
     },  
     followers: {
-        type: [new mongoose.Schema({username: String, posts: {type: [postSchema]}})]
+        type: [{userId: String, username: String, emailHash: String}]
     },
     following: {
-        type: [new mongoose.Schema({username: String, posts: {type: [postSchema]}})]
+        type: [{userId: String, username: String, emailHash: String}]
     }
 });
 

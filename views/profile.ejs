@@ -16,7 +16,7 @@
         
             <div class="user-posts-container">
               <% if(user.posts.length === 0){  %>
-                  <h1 style="font-size: 300%; text-align: center; margin-top: 10%; color: rgb(79, 79, 79);">No posts yet!!!<br><a href="/dashboard/create" class="btn btn-success btn-sm me-md-2" type="button">Create a post</a>
+                  <h1 style="font-size: 300%; text-align: center; margin-top: 10%; color: rgb(79, 79, 79);">No posts!!!<br><a href="/dashboard/create" class="btn btn-success btn-sm me-md-2" type="button">Create a post</a>
                   </h1>
               <% }else{  %>
                 <% user.posts.slice().reverse().forEach(post=>{  %>

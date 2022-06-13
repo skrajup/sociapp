@@ -13,9 +13,15 @@
 
 <div class="home-profile-content wid-80">
   <div class="user-details home-user-details">
-      <h1><img class="profile-img" src="//www.gravatar.com/avatar/<%=foundUser.emailHash%>?d=monsterid" alt="guest-img"> <%=user.username%></h1>
+      <h1><img class="profile-img" src="//www.gravatar.com/avatar/<%=foundUser.emailHash%>?d=monsterid" alt="guest-img"> <%=foundUser.username%></h1>
       <!-- <i class="fa fa-user" aria-hidden="true"></i> -->
-      <a href="#" type="button" class="btn btn-primary btn-sm btn-block">Follow+</a>
+      <!-- rendering follow and unfollow buttons -->
+      <% if(user.following.findIndex(user=>{return user.username===foundUser.username;})===-1){ %>
+        <a href="/users/<%=foundUser._id%>/follow" type="button" class="btn btn-primary btn btn-block">Follow <i class="fa fa-plus-circle" aria-hidden="true"></i> </a>
+      <% }else{ %>
+        <a href="/users/<%=foundUser._id%>/follow" type="button" class="btn btn-success btn btn-block" style="pointer-events: none;">Following <i class="fa fa-handshake" aria-hidden="true"></i> </a>
+        <a href="/users/<%=foundUser._id%>/unfollow" type="button" class="btn btn-danger btn btn-block">Unfollow <i class="fa fa-minus-circle" aria-hidden="true"></i></a>
+      <% } %>
   </div>
     <br>
     <div class="user-posts home-user-posts">
@@ -26,7 +32,7 @@
         </ul>        
         <div class="user-posts-container">
           <% if(foundUser.posts.length === 0){  %>
-              <h1 style="font-size: 300%; text-align: center; margin-top: 10%; color: rgb(79, 79, 79);">No posts yet!!!                 
+              <h1 style="font-size: 300%; text-align: center; margin-top: 10%; color: rgb(79, 79, 79);">No posts!!!                 
               </h1>
           <% }else{  %>
             <% foundUser.posts.slice().reverse().forEach(post=>{  %>

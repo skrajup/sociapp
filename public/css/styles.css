@@ -1,9 +1,11 @@
 /* @import url('https://fonts.googleapis.com/css2?family=Assistant:wght@300&display=swap'); */
-@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Bitter&display=swap');
 
 body {
     /* font-family: 'Assistant', sans-serif; */
-    font-family: 'Nunito', sans-serif;
+    /* font-family: 'Nunito', sans-serif; */
+    font-family: 'Bitter', serif;
 }
 
 /* homepage styles */
@@ -109,7 +111,13 @@ a {
 
 /* profile image */
 .profile-img {
+    border: 1px solid rgb(0, 123, 20);
     border-radius: 50%;
+    box-shadow: 0 0 10px rgb(189, 189, 189) ;
+}
+
+.profile-img:hover {
+    box-shadow: inset 0 0 10px rgb(189, 189, 189) ;
 }
 
 /* profile page post section */
@@ -171,4 +179,11 @@ a {
 .error-message {
     background: #a10000;
     color: rgb(245, 245, 245);
+}
+
+/* followers/ followings */
+.followering-profiles {
+    color: #1d2a57;
+    font-weight: 600;
+
 }
