@@ -39,7 +39,7 @@ const dashboard_create_post = (req, res)=>{
     newPost.save((err)=>{
         if(err){
             console.log(err);
-            req.flash("errorMsg", "Post can not be created!!!");
+            req.flash("errorMsg", "Title and Body fields are required!!!");
             res.redirect("back");
         }else{
             // console.log(newPost);

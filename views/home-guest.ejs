@@ -1,50 +1,47 @@
 <%- include('partials/header') %>
-  <%  if(successMsg.length!=0){ %>
-    <div class="message success-message">
-      <p class="message-content"><%=successMsg%></p>
-    </div>
-  <% } %>
 
-  <%  if(errorMsg.length!=0){ %>
-    <div class="message error-message">
-      <p class="message-content"><%=errorMsg%></p>
-    </div>
-  <% } %>
+  <div class="home-profile-content wid-80">
+    <!-- follow unfollow success failure messages -->
+    <%- include('partials/messages/success-failure')%>
 
-<div class="home-profile-content wid-80">
-  <div class="user-details home-user-details">
-      <h1><img class="profile-img" src="//www.gravatar.com/avatar/<%=foundUser.emailHash%>?d=monsterid" alt="guest-img"> <%=foundUser.username%></h1>
-      <!-- <i class="fa fa-user" aria-hidden="true"></i> -->
-      <!-- rendering follow and unfollow buttons -->
-      <% if(user.following.findIndex(user=>{return user.username===foundUser.username;})===-1){ %>
-        <a href="/users/<%=foundUser._id%>/follow" type="button" class="btn btn-primary btn btn-block">Follow <i class="fa fa-plus-circle" aria-hidden="true"></i> </a>
-      <% }else{ %>
-        <a href="/users/<%=foundUser._id%>/follow" type="button" class="btn btn-success btn btn-block" style="pointer-events: none;">Following <i class="fa fa-handshake" aria-hidden="true"></i> </a>
-        <a href="/users/<%=foundUser._id%>/unfollow" type="button" class="btn btn-danger btn btn-block">Unfollow <i class="fa fa-minus-circle" aria-hidden="true"></i></a>
-      <% } %>
+    <div class="user-details home-user-details">
+        <h1><img class="profile-img" src="//www.gravatar.com/avatar/<%=foundUser.emailHash%>?d=retro" alt="guest-img"> <%=foundUser.username%></h1>
+        <!-- <i class="fa fa-user" aria-hidden="true"></i> -->
+        <!-- rendering follow and unfollow buttons -->
+        <% if(user.following.findIndex(user=>{return user.username===foundUser.username;})===-1){ %>
+          <a href="/users/<%=foundUser._id%>/follow" type="button" class="btn btn-primary btn btn-block">Follow <i class="fa fa-plus-circle" aria-hidden="true"></i> </a>
+        <% }else{ %>
+          <a href="/users/<%=foundUser._id%>/follow" type="button" class="btn btn-success btn btn-block" style="pointer-events: none;">Following <i class="fa fa-handshake" aria-hidden="true"></i> </a>
+          <a href="/users/<%=foundUser._id%>/unfollow" type="button" class="btn btn-danger btn btn-block">Unfollow <i class="fa fa-minus-circle" aria-hidden="true"></i></a>
+        <% } %>
+    </div>
+      <br>
+      <div class="user-posts home-user-posts">
+          <ul class="nav nav-tabs">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page">Posts: <%=foundUser.posts.length%></a>
+              </li>
+          </ul>        
+          <div class="user-posts-container">
+            <br>
+            <% if(foundUser.posts.length === 0){  %>
+                <h1 style="font-size: 300%; text-align: center; margin-top: 10%; color: rgb(79, 79, 79);">No posts!!!                 
+                </h1>
+            <% }else{  %>
+              <% foundUser.posts.slice().reverse().forEach(post=>{  %>
+                  <div class="card">
+                    <h5 class="card-header small">A post by <a href="/users/<%=foundUser._id%>" class="badge bg-warning"><%=foundUser.username%></a> on <%=post.postedOn%> </h5>
+                    <div class="card-body">
+                      <h5 class="card-title"><%=post.title.substr(0, 30)+" --- "%></h5>
+                      <p class="card-text"><%=post.body.substr(0, 200)+"......" %></p>
+                      <a href="/posts/<%=post._id%>" class="btn btn-sm btn-success">read full post</a>
+                    </div>
+                  </div>
+                  <br>
+                <% }) %>
+              <% }  %>
+          </div>  
+      </div>
   </div>
-    <br>
-    <div class="user-posts home-user-posts">
-        <ul class="nav nav-tabs">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page">Posts: <%=foundUser.posts.length%></a>
-            </li>
-        </ul>        
-        <div class="user-posts-container">
-          <% if(foundUser.posts.length === 0){  %>
-              <h1 style="font-size: 300%; text-align: center; margin-top: 10%; color: rgb(79, 79, 79);">No posts!!!                 
-              </h1>
-          <% }else{  %>
-            <% foundUser.posts.slice().reverse().forEach(post=>{  %>
-                <div class="user-post">
-                  <h5><a href="/posts/<%=post._id%>"><%=post.title.substr(0, 70)+" --- "%>Read Full Post</a></h5>
-                  <p><small><%=post.body.substr(0, 300)+"......" %></small></p>
-                  <p><b>Posted by </b><%=foundUser.username%> on <%=post.postedOn%> </p>
-                </div>
-              <% }) %>
-            <% }  %>
-        </div>  
-    </div>
-</div>
 
 <%- include('partials/footer') %>

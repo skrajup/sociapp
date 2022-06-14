@@ -32,7 +32,7 @@ body {
     height: 50px;
     text-align: center;
     vertical-align: middle;
-    font-size: xx-small;
+    font-size: x-small;
 }
 
 /* common style */
@@ -159,19 +159,20 @@ a {
 }
 
 /* message, error message, success message */
-.message {
+/* .message {
+    z-index: 1;
     position: absolute;
     top: 80%;
-    width: 50%;
+    width: auto;
     text-align: center;
     padding: 10px;
-}
-.success-message {
+} */
+/* .success-message {
     background: #16a100;
     color: rgb(245, 245, 245);
-}
+} */
 
-.message-content {
+/* .message-content {
     margin-bottom: 0;
     font-weight: 700;
 }
@@ -179,7 +180,7 @@ a {
 .error-message {
     background: #a10000;
     color: rgb(245, 245, 245);
-}
+} */
 
 /* followers/ followings */
 .followering-profiles {

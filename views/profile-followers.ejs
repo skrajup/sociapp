@@ -1,26 +1,16 @@
 <%- include('partials/header') %>
 
     <%- include('partials/profileHead')%> 
-          <%  if(successMsg.length!=0){ %>
-            <div class="message success-message">
-              <p class="message-content"><%=successMsg%></p>
-            </div>
-          <% } %>
-
-          <%  if(errorMsg.length!=0){ %>
-            <div class="message error-message">
-              <p class="message-content"><%=errorMsg%></p>
-            </div>
-          <% } %>
-          
           <div class="user-followers-container">
+            <%- include('partials/messages/success-failure')%>
+
             <% if(user.followers.length === 0){ %>
               <h1 style="font-size: 300%; text-align: center; margin-top: 10%; color: rgb(79, 79, 79);"><i class="fa fa-frown" aria-hidden="true"></i><br>No followers
                 </h1>
             <% }else{ %>
             <ul class="list-group list-group-flush">
               <% user.followers.forEach(user=>{ %>
-                <li class="list-group-item"><a class="followering-profiles" href="/users/<%=user.userId%>"><img class="profile-img" src="//www.gravatar.com/avatar/<%=user.emailHash%>?d=monsterid&s=35" alt=""> <%=user.username%></a></li>
+                <li class="list-group-item"><a class="followering-profiles" href="/users/<%=user.userId%>"><img class="profile-img" src="//www.gravatar.com/avatar/<%=user.emailHash%>?d=retro&s=35" alt=""> <%=user.username%></a></li>
               <% }); %>
             </ul>
             <% } %> 

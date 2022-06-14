@@ -16,13 +16,16 @@
             <h1><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></h1>
             <h1>something went wrong</h1>
 
-            <div class="progress" style="height: 100px;" >
+            <!-- <div class="progress" style="height: 100px;" >
                 <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar" style="width: 100%; font-size: x-large;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">Error: 
                 <% if(errorMsg){ %>
                     <%=errorMsg%>
                 <% } %>
                 </div>
-            </div>
+            </div> -->
+            
+            <!-- success failure messages -->
+            <%- include('partials/messages/success-failure')%>
         
         </div>
         

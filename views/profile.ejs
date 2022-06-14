@@ -1,32 +1,30 @@
 <%- include('partials/header') %>
 
       <%- include('partials/profileHead')%>
-
-            <%  if(successMsg.length!=0){ %>
-              <div class="message success-message">
-                <p class="message-content"><%=successMsg%></p>
-              </div>
-            <% } %>
-
-            <%  if(errorMsg.length!=0){ %>
-              <div class="message error-message">
-                <p class="message-content"><%=errorMsg%></p>
-              </div>
-            <% } %>
         
             <div class="user-posts-container">
+              <%- include('partials/messages/success-failure')%>
+              <br>
+
               <% if(user.posts.length === 0){  %>
                   <h1 style="font-size: 300%; text-align: center; margin-top: 10%; color: rgb(79, 79, 79);">No posts!!!<br><a href="/dashboard/create" class="btn btn-success btn-sm me-md-2" type="button">Create a post</a>
                   </h1>
               <% }else{  %>
                 <% user.posts.slice().reverse().forEach(post=>{  %>
-                    <div class="user-post">
-                      <h5><a href="/posts/<%=post._id%>"><%=post.title.substr(0, 70)+" --- "%>Read Full Post</a></h5>
-                      <p><small><%=post.body.substr(0, 300)+"......" %></small></p>
-                      <p><b>Posted by </b><%=user.username%> on <%=post.postedOn%> </p>
+                    
+                    <div class="card">
+                      <h5 class="card-header small">A post by <a href="/users/<%=user._id%>" class="badge bg-warning"><%=user.username%></a> on <%=post.postedOn%> </h5>
+                      <div class="card-body">
+                        <h5 class="card-title"><%=post.title.substr(0, 30)+" --- "%></h5>
+                        <p class="card-text"><%=post.body.substr(0, 200)+"......" %></p>
+                        <a href="/posts/<%=post._id%>" class="btn btn-sm btn-success">read full post</a>
+                      </div>
                     </div>
+                    <br>
+                    
                   <% }) %>
                 <% }  %>
+
             </div>
           
       <%- include('partials/profileFoot')%>

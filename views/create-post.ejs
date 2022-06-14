@@ -1,18 +1,9 @@
 <%- include('partials/header') %>
 
-        <%  if(successMsg.length!=0){ %>
-            <div class="message success-message">
-            <p class="message-content"><%=successMsg%></p>
-            </div>
-        <% } %>
-
-        <%  if(errorMsg.length!=0){ %>
-            <div class="message error-message">
-            <p class="message-content"><%=errorMsg%></p>
-            </div>
-        <% } %>
-
         <div class="post-create-content wid-80">
+            <!-- success failure messages -->
+            <%- include('partials/messages/success-failure')%>
+
             <form action="/dashboard/create" method="post">
                 <div class="mb-3">
                     <label for="title" class="form-label">Title</label>

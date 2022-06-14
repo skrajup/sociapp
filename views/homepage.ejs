@@ -1,16 +1,5 @@
 <%- include('partials/homepage-header') %>
-
-      <% if(successMsg.length!=0){ %>
-        <div class="message success-message">
-          <p class="message-content"><%=successMsg%></p>
-        </div>
-      <% } %>
-
-      <%  if(errorMsg.length!=0){ %>
-        <div class="message error-message">
-          <p class="message-content"><%=errorMsg%></p>
-        </div>
-      <% } %>
+      <%- include('partials/messages/success-failure')%>
 
       <div class="custom-flex">
         <div>
