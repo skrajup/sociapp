@@ -1,0 +1,61 @@
+<!-- <html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <title>Search SociApp</title>
+</head>
+<body>
+    <div class="custom-container"> -->
+    <%- include('partials/header') %>
+        <div class="search-container">
+            <div class="search-panel-wrapper">
+                <div class="search-sociapp">
+                    Search Sociapp
+                </div>
+                <form action="/dashboard/search/key" method="post">
+                    <input type="search" name="search" id="search" placeholder="search username or post related something">
+                </form>
+            </div>
+            <div class="usersMatched">
+                <h5>Related users</h5>
+                <%  if(users.length!=0){   %>
+                    <%  users.forEach(matchedUser=>{   %>
+                        <%console.log(matchedUser)%>
+                        <div class="user-card">
+                            <div><img src="//www.gravatar.com/avatar/<%=matchedUser.emailHash%>?d=retro&s=35" alt="user-img"></div>
+                            <div><a href="/users/<%=matchedUser.id%>"><%=matchedUser.username%></a></div>
+                        </div>
+                    <%  })   %> 
+                <%  }else{   %>
+                    <div class="user-card">
+                        <div>No user found</div>
+                    </div>
+                <%  }   %>
+            </div>
+            <div class="postsMatched">
+                <h5>Related posts</h5>
+                <%  if(posts.length!=0){   %>
+                    <%  posts.forEach(postMatched=>{   %>
+                        <div class="post-card">
+                            <div class="matched-post-content">
+                                <a href="/posts/<%=postMatched.id%>"><%=postMatched.title%></a>
+                            </div>
+                        </div>
+                    <%  })   %>
+                <%  }else{   %>
+                    <div class="post-card">
+                        <div class="matched-post-content">
+                            No posts found
+                        </div>
+                    </div>
+                <%  }   %>
+            </div>
+        </div>
+
+        <script src="/js/search.js"></script>
+    <%- include('partials/footer') %>
+    <!-- </div>
+</body>
+</html> -->

@@ -30,8 +30,25 @@ const userSchema = new mongoose.Schema({
     }
 });
 
+// create index to perform full text search 
+// we will index username to search users
+userSchema.index({
+    username: "text",
+    email: "text"
+});
+
 //plugin to userSchema
 userSchema.plugin(passportLocalMongoose);
 
 //export model
-module.exports = new mongoose.model("User", userSchema);
+var User = new mongoose.model("User", userSchema);
+
+// // check indexes created
+// User.collection.getIndexes({full: true}).then(indexes=>{
+//     console.log(indexes);
+// }).catch(err=>{
+//     console.log(err);
+// });
+
+module.exports = User;
+

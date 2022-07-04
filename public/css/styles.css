@@ -111,13 +111,8 @@ a {
 
 /* profile image */
 .profile-img {
-    border: 1px solid rgb(0, 123, 20);
+    border: 1px solid rgb(0, 0, 0);
     border-radius: 50%;
-    box-shadow: 0 0 10px rgb(189, 189, 189) ;
-}
-
-.profile-img:hover {
-    box-shadow: inset 0 0 10px rgb(189, 189, 189) ;
 }
 
 /* profile page post section */
@@ -188,3 +183,72 @@ a {
     font-weight: 600;
 
 }
+
+
+/* search panel styling */
+
+.search-container {
+    width: 80%;
+    margin: auto;
+}
+
+.search-sociapp {
+    text-align: center;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    font-size: 2rem;
+}
+
+.search-panel-wrapper > form > input {
+    display: block;
+    width: 100%;
+    padding: 20px 30px;
+    border: none;
+    border-radius: 2rem;
+    background: rgb(255, 255, 255);
+    box-shadow:0.2rem 0.2rem 0.8rem #ccc;
+    font-size: 1rem;
+}
+
+.search-panel-wrapper > form > input:hover{
+    box-shadow:inset 0.2rem 0.2rem 0.8rem #ccc;
+}
+
+.usersMatched, .postsMatched {
+    padding: 20px;
+}
+
+.user-card{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+
+    margin-bottom: 10px;
+    padding: 1rem;
+    border: 1px solid #000;
+}
+
+.user-card > div > img {
+    margin-right: 0.75rem;
+    border-radius: 2rem;
+}
+
+.user-card > div > a {
+    color: rgba(0, 86, 99, 0.833);
+    font-weight: 600;
+}
+
+.post-card {
+    padding: 1rem;
+    border: 1px solid #000;
+    /* border-radius: 2rem; */
+    margin-bottom: 10px;
+}
+
+.matched-post-content > a{
+    color: rgba(0, 86, 99, 0.833);
+    font-weight: 600;
+}
+
+

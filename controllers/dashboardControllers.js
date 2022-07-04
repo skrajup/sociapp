@@ -1,5 +1,5 @@
 const { Post } = require("../models/post"); //Post model
-const user = require("../models/user");
+const User = require("../models/user");
 
 
 const dashboard_index = (req, res)=>{
@@ -12,6 +12,37 @@ const dashboard_index = (req, res)=>{
         'no-cache, private, no-store, must-revalidate, max-stal e=0, post-check=0, pre-check=0'
     );
     res.render("dashboard", {user: req.user, successMsg: req.flash("successMsg"), errorMsg: req.flash("errorMsg")});
+}
+// search panel requests
+var usersFound = [];
+var postsFound = [];
+
+const dashboard_search_get = (req, res)=>{
+    res.set(
+        'Cache-Control',
+        'no-cache, private, no-store, must-revalidate, max-stal e=0, post-check=0, pre-check=0'
+    );
+    res.render("search", {user: req.user, users: usersFound, posts: postsFound, successMsg: req.flash("successMsg"), errorMsg: req.flash("errorMsg")});
+}
+
+const dashboard_search_key_post = (req, res)=>{
+    res.set(
+        'Cache-Control',
+        'no-cache, private, no-store, must-revalidate, max-stal e=0, post-check=0, pre-check=0'
+    );
+    
+    var key = req.body.search;
+    // console.log(key);
+    User.find({$text: {$search: key}}, {score: {$meta: "textScore"}}).sort({score: {$meta: "textScore"}})
+        .then(users=>{
+            usersFound = users;
+            Post.find({$text: {$search: key}}, {score: {$meta: "textScore"}}).sort({score: {$meta: "textScore"}})
+                .then(posts=>{
+                    // console.log(posts);
+                    postsFound = posts;
+                    res.redirect("back");
+                });
+        });
 }
 
 const dashboard_create_get = (req, res)=>{
@@ -83,6 +114,8 @@ const dashboard_profile_following_get = (req, res)=>{
 
 module.exports = {
     dashboard_index,
+    dashboard_search_get,
+    dashboard_search_key_post,
     dashboard_create_get,
     dashboard_create_post,
     dashboard_profile_get,

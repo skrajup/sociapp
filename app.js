@@ -57,6 +57,9 @@ app.use("/dashboard", dashboardRoutes);
 app.use("/posts", postRoutes);
 app.use("/users", userRoutes);
 
+// testing
+
+
 app.listen(3000, ()=>{
     console.log("the app is running on port 3000");
 });
