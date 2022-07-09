@@ -118,7 +118,6 @@ const dashboard_profile_following_get = (req, res)=>{
         'no-cache, private, no-store, must-revalidate, max-stal e=0, post-check=0, pre-check=0'
     );  
     
-    console.log(req.user);
     res.render("profile-following.ejs", {user: req.user, classes: ["", "", "active"], loggedId: req.user._id, successMsg: req.flash("successMsg"), errorMsg: req.flash("errorMsg")});
 }
 

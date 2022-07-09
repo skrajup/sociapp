@@ -7,6 +7,10 @@ const home_index = (req, res)=>{
     res.render("homepage", {successMsg: req.flash("successMsg"), errorMsg: req.flash("errorMsg")});
 }
 
+const privacy_page = (req, res)=>{
+    res.render("T&C", {successMsg: req.flash("successMsg"), errorMsg: req.flash("errorMsg")});
+}
+
 const error_page = (req, res)=>{
     res.render("404", {errorMsg: req.flash("errorMsg")});
 }
@@ -39,6 +43,7 @@ const signup = (req, res)=>{
 
 module.exports = {
     home_index,
+    privacy_page,
     error_page,
     signout,
     signup

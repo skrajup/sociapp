@@ -4,6 +4,7 @@ const homeControllers = require("../controllers/homeControllers");
 
 // all home routes
 router.get("/", homeControllers.home_index);
+router.get("/T&C", homeControllers.privacy_page);
 router.get("/404", homeControllers.error_page);
 router.get("/sign-out", homeControllers.signout);
 router.post("/signup", homeControllers.signup);
