@@ -1,33 +1,78 @@
 <%- include('partials/homepage-header') %>
+      <div class="bg">
       <%- include('partials/messages/success-failure')%>
 
       <div class="custom-flex">
+        <!-- social login start -->
+        <div class="social-login-flex">
+         
+          <div class="logo">
+            <img src="/images/sociapp_logo.png" alt="sociapp_logo">
+            <h6>SociaApp</h6>
+          </div>
+
+           <div>
+            <h6>Login with social networks</h6>
+          </div>
         <div>
-          <a class="btn btn-block btn-social btn-google" href="/auth/google" role="button">
+          <a class="btn btn-block btn-social btn-google" href="/auth/google" role="button" style="width: 20rem; text-align: center;">
             <i class="fab fa-google"></i>
-            Sign In with Google
+            Login with Google
           </a>
         </div>
         <div>
-          <form action="/signup" method="post">
+          <a class="btn btn-block btn-social btn-facebook" href="/auth/facebook" role="button" style="width: 20rem; text-align: center;">
+            <i class="fab fa-facebook"></i>
+            Login with Facebook
+          </a>
+        </div>
+        <div>
+          <a class="btn btn-block btn-social btn-twitter" href="/auth/twitter" role="button" style="width: 20rem; text-align: center;">
+            <i class="fab fa-twitter"></i>
+            Login with Twitter
+          </a>
+        </div>
+      </div>
+      <!-- social login finish -->
+      <!-- seperator start -->
+      <div class="separator">
+        <hr>OR<hr>
+      </div>
+      <!-- separator end -->
+
+        <div>
+          <!-- <div class="logo">
+            <img src="/images/sociapp_logo.png" alt="sociapp_logo">
+            <h6>SociaApp</h6>
+          </div> -->
+          <form action="/signup" method="post" class="login-form">
             <div class="mb-3">
-              <label for="username" class="form-label">Username</label>
-              <input type="text" class="form-control" id="username" name="username" placeholder="Pick a username">
+              <!-- <label for="username" class="form-label">Username</label> -->
+              <input type="text" class="form-control" id="username" name="username" placeholder="username" required>
             </div>
             <div class="mb-3">
-              <label for="email" class="form-label">Email address</label>
-              <input type="email" class="form-control" id="email" name="email" placeholder="abc@def.ghi">
+              <!-- <label for="email" class="form-label">Email address</label> -->
+              <input type="email" class="form-control" id="email" name="email" placeholder="email" required>
             </div>
             <div class="mb-3">
-              <label for="password" class="form-label">Password</label>
-              <input type="password" class="form-control" id="password" name="password" placeholder="password">
+              <!-- <label for="password" class="form-label">Password</label> -->
+              <input type="password" class="form-control" id="password" name="password" placeholder="password" required>
             </div>
             
             <button type="submit" class="btn btn-primary">Sign Up</button>
           </form>
         </div>
       </div>
-
+    </div>
       
 
 <%- include('partials/footer') %>
+
+
+
+
+
+
+
+<!-- logo credit -->
+<!-- <a href="https://www.flaticon.com/free-icons/handshake" title="handshake icons">Handshake icons created by Uniconlabs - Flaticon</a> -->

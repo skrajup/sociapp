@@ -5,7 +5,13 @@
     <%- include('partials/messages/success-failure')%>
 
     <div class="user-details home-user-details">
-        <h1><img class="profile-img" src="//www.gravatar.com/avatar/<%=foundUser.emailHash%>?d=retro" alt="guest-img"> <%=foundUser.username%></h1>
+        <h1>
+          <% if(foundUser.profilePic){ %>
+            <img class="profile-img" src="<%=foundUser.profilePic%>" style="height: 60px; width: 60px;" alt="user-img">
+          <% }else{ %>
+            <img class="profile-img" src="//www.gravatar.com/avatar/<%=foundUser.emailHash%>?d=retro&s=60" alt="user-img">
+          <% } %>
+           <%=foundUser.username%></h1>
         <!-- <i class="fa fa-user" aria-hidden="true"></i> -->
         <!-- rendering follow and unfollow buttons -->
         <% if(user.following.findIndex(user=>{return user.username===foundUser.username;})===-1){ %>

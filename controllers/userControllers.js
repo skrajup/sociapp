@@ -46,10 +46,10 @@ const users_id_follow_get = (req, res)=>{
                     }else{
                         // otherwise
                         // add to the following of logged in user
-                        req.user.following.push({userId: (foundUser._id).toString(), username: foundUser.username, emailHash: foundUser.emailHash});
+                        req.user.following.push({userId: (foundUser._id).toString(), username: foundUser.username, emailHash: foundUser.emailHash, profilePic: foundUser.profilePic});
                         req.user.save().then(()=>{
                             //add to followers of next user
-                            foundUser.followers.push({userId: (req.user._id).toString(), username: req.user.username, emailHash: req.user.emailHash});
+                            foundUser.followers.push({userId: (req.user._id).toString(), username: req.user.username, emailHash: req.user.emailHash, profilePic: req.user.profilePic});
                             foundUser.save().then(()=>{
                                 // console.log(foundUser);
                                 req.flash("successMsg", "You have successfully followed "+foundUser.username);

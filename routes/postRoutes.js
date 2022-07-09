@@ -1,7 +1,6 @@
-const express = require("express");
+const router = require("express").Router();
 const connectEnsureLogin = require('connect-ensure-login');// authorization
 const postControllers = require("../controllers/postControllers");
-const router = express.Router();
 
 // posts routes
 router.get("/:id", connectEnsureLogin.ensureLoggedIn("/"), postControllers.posts_id_get);

@@ -45,6 +45,15 @@ const dashboard_search_key_post = (req, res)=>{
         });
 }
 
+const dashboard_chat_get = (req, res)=>{
+    res.set(
+        'Cache-Control',
+        'no-cache, private, no-store, must-revalidate, max-stal e=0, post-check=0, pre-check=0'
+    );
+
+    res.render("chat", {user: req.user, successMsg: req.flash("successMsg"), errorMsg: req.flash("errorMsg")});
+}
+
 const dashboard_create_get = (req, res)=>{
     res.set(
         'Cache-Control',
@@ -107,8 +116,9 @@ const dashboard_profile_following_get = (req, res)=>{
     res.set(
         'Cache-Control',
         'no-cache, private, no-store, must-revalidate, max-stal e=0, post-check=0, pre-check=0'
-    );
+    );  
     
+    console.log(req.user);
     res.render("profile-following.ejs", {user: req.user, classes: ["", "", "active"], loggedId: req.user._id, successMsg: req.flash("successMsg"), errorMsg: req.flash("errorMsg")});
 }
 
@@ -116,6 +126,7 @@ module.exports = {
     dashboard_index,
     dashboard_search_get,
     dashboard_search_key_post,
+    dashboard_chat_get,
     dashboard_create_get,
     dashboard_create_post,
     dashboard_profile_get,
