@@ -1,7 +1,12 @@
 <div class="home-profile-content wid-80">
     <div class="user-details home-user-details">
-      <!-- <i class="fa fa-user" aria-hidden="true"></i> -->
-        <h1><img class="profile-img" src="//www.gravatar.com/avatar/<%=user.emailHash%>?d=retro" alt="user-img"> <%=user.username%></h1>
+        <h1>
+          <% if(user.profilePic){ %>
+            <img class="profile-img" src="<%=user.profilePic%>" style="height: 60px; width: 60px;" alt="user-img">
+          <% }else{ %>
+            <img class="profile-img" src="//www.gravatar.com/avatar/<%=user.emailHash%>?d=retro&s=60" alt="user-img">
+          <% } %>
+          <%=user.username%></h1>
     </div>
     
       <div class="user-posts home-user-posts">

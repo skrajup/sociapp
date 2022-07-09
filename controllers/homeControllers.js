@@ -23,7 +23,7 @@ const signout = (req, res)=>{
 }
 
 const signup = (req, res)=>{
-    User.register(new User({username: req.body.username, email: req.body.email, emailHash: md5(req.body.email)}), req.body.password, function (err, user) {  
+    User.register(new User({ provider: "self", username: req.body.username, email: req.body.email, emailHash: md5(req.body.email)}), req.body.password, function (err, user) {  
         if(err){
             console.log(err);
             req.flash("errorMsg", "error ocurred during signing up!!!");

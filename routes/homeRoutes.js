@@ -1,7 +1,6 @@
-const express = require("express");
+const router = require("express").Router();
 const passport = require("passport");// authentication
 const homeControllers = require("../controllers/homeControllers");
-const router = express.Router();
 
 // all home routes
 router.get("/", homeControllers.home_index);

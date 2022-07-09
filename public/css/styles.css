@@ -1,38 +1,156 @@
 /* @import url('https://fonts.googleapis.com/css2?family=Assistant:wght@300&display=swap'); */
 /* @import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap'); */
 @import url('https://fonts.googleapis.com/css2?family=Bitter&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600&display=swap');
 
 body {
     /* font-family: 'Assistant', sans-serif; */
     /* font-family: 'Nunito', sans-serif; */
     font-family: 'Bitter', serif;
+    /* background: linear-gradient(to right, #24243e, #302b63, #0f0c29); */
+    overflow-y: scroll;
+    /* hide scroll bar */
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+}
+
+/* hide scroll bar */
+body::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
 }
 
 /* homepage styles */
 .custom-container {
-    width: 90%;
+    width: 100%;
     margin: auto;
 }
 
+.navbar {
+    background-image: url("/images/bg5.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.app-name-stylish {
+    font-size: 5vw;
+    font-family: 'Cinzel', serif;
+}
+
+.bg {
+    background-image: url("/images/bg4.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    /* background: #0f0c29; 
+    background: -webkit-linear-gradient(to right, #24243e, #302b63, #0f0c29);  
+    background: linear-gradient(to right, #24243e, #302b63, #0f0c29); */
+    color: aliceblue;
+}
+
 .custom-flex {
-    height: 500px;
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-items: center;
+    flex-direction: column;
+    align-content: space-around;
+    justify-content: center;
+    padding-bottom: 50px;
 }
 
 .custom-flex > div {
-    flex-basis: 40%;
-    margin-left: 20px;
+    width: 500px;
+    padding: 0 50px;
+    margin: 10px auto;
+}
+
+.social-login-flex {
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    align-content: space-between;
+    justify-content: center;
+    justify-items: center;
+}
+
+.social-login-flex > div {
+    margin-bottom: 1rem;
+}
+
+.social-login-flex > div:first-child > h6 {
+    font-size: 12pt;
+}
+
+.logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 3rem;
+}
+
+.logo > img {
+    width: 8vw;
+    height: 8vw;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 50%;
+    border: 1px solid rgb(1, 36, 104);
+    box-shadow: 0 0 5px #ccc;
+}
+
+.logo > h6 {
+    color:antiquewhite;
+}
+
+.separator {
+    text-align: center;
+    font-size: large;
+}
+
+.separator > hr {
+    background: transparent;
+    border-bottom: 5px dotted rgb(218, 218, 218);
+    width: 20%;
+    margin: 5px auto;
+}
+
+.login-form > div > input {
+    border-radius: 5rem;
+    font-size: 15px;
+}
+
+.login-form > button {
+    display: block;
+    width: 8rem;
+    margin: auto;
+    border-radius: 5rem;
+    font-size: 12px;
 }
 
 .footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     height: 50px;
     text-align: center;
-    vertical-align: middle;
-    font-size: x-small;
+    font-size: small;
+    color: #fff;
+    background-image: url("/images/bg5.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+@media only screen and (max-width: 500px) {
+    /* For mobile phones: */
+    .custom-flex > div {
+        width: 100%;
+    }
+
+    .logo > img {
+        width: 50px;
+        height: 50px;
+    }
 }
 
 /* common style */
@@ -45,6 +163,19 @@ body {
 .home-dashboard-content {
     padding: 20px 100px;
     text-align: center;
+}
+
+/* media queries */
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    .home-dashboard-content {
+        padding: 10px;
+        font-size: smaller;
+    }
+
+    .wid-80{
+        width: 100%;
+    }
 }
 
 /* post-create-content */
@@ -252,3 +383,190 @@ a {
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+/* chat panel css */
+
+.chat-container {
+    max-width: 90%;
+    width: 50%;
+    margin: 2rem auto;
+    border: 0.5px solid #62118a;
+}
+
+.chat-panel-wrapper{
+    height: 500px;
+    overflow-y: scroll;
+    position: relative;
+    /* hide scroll bar */
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+}
+/* hide scroll bar */
+.chat-panel-wrapper::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+}
+
+.panel-head {
+    padding: 5px;
+    border-bottom: 1px solid #ccc;
+    background: #62118a;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.panel-head-flex {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 10px;
+    position: relative;
+}
+
+.panel-head-flex > div > img{
+    border-radius: 50%;
+    margin-right: 1rem;
+}
+
+.panel-head-flex > div > a{
+    text-decoration: none;
+    font-size: 18px;
+    color: rgb(150, 150, 150);
+}
+
+.align-right {
+    position: absolute;
+    top: 30%;
+    right: 8px;
+}
+/* panel body styling */
+.panel-body{
+    margin-top: 1rem;
+    z-index: 0;
+}
+
+.chat-table {
+    padding: 0 1rem;
+}
+
+.chat-msg {
+    display: inline-block;
+    width: 60%;
+    margin-bottom: 0.25rem;
+    padding: 0.45rem;
+}
+
+.chat-msg-text {
+    display: inline-block;
+    margin-top: 0.2rem;
+    border: 0.3px solid #3b443b;
+    border-radius: 0.25rem 0rem 0.25rem 0rem;
+    padding: 0.25rem 0.35rem;
+    word-break: break-all;
+}
+
+.reciepient {
+    text-align: left;
+}
+
+.reciepient > img {
+    border-radius: 50%;
+}
+
+.reciepient > span {
+    background-color: rgba(247, 247, 247, 0.829);
+}
+
+.sender {
+    margin-left: 40%;
+    text-align: right;
+}
+
+.sender > span {
+    background-color: rgba(245, 215, 255, 0.979);
+    color: rgb(4, 37, 66);
+}
+
+.chat-msg-form {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0;
+}
+
+.msg-input {
+    flex-basis: 80%;
+}
+
+.send-msg {
+    flex-basis: 20%;
+}
+
+.msg-input > input{
+    display: block;
+    width: 100%;
+    padding: 10px 20px;
+    height: 2.7rem;
+    border: 0.5px solid #62118a ;
+    border-width: 0.5px 0 0 0;
+    background: rgb(255, 255, 255);
+    /* box-shadow: inset 5px 5px 10px #ccc; */
+    outline: none;
+}
+
+.send-msg > button{
+    height: 2.7rem;
+    width: 100%;
+    background: #02427d;
+    font-size: 20px;
+    color: rgb(255, 255, 255);
+    border: 0.5px #00274e solid;
+    /* border-width: 0 0 2px 0; */
+}
+
+.send-msg > button:hover{
+    box-shadow: inset 5px 5px 10px rgb(1, 13, 88);
+}
+
+/* media queries */
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    .chat-container {
+        width: 90%;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* homepage attricbute png */
+/* <a href='https://www.freepik.com/vectors/memphis-shapes'>Memphis shapes vector created by starline - www.freepik.com</a> */

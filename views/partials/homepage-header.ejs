@@ -15,17 +15,20 @@
     <div class="custom-container">
       <nav class="navbar navbar-dark bg-dark">
         <div class="container-fluid">
-          <a class="navbar-brand">SociApp</a>
+          <div class="logo navbar-brand mb-0">
+            <img src="/images/sociapp_logo.png" alt="sociapp_logo">
+            </div>
+          <a class="navbar-brand app-name-stylish">SociApp</a>
           <form class="flex" action="/signin" method="post">
             <div class="row">
               <div class="col">
-                <input type="text" id="username" name="username" class="form-control" placeholder="username">
+                <input type="text" id="username" name="username" class="form-control" placeholder="username" style="border-radius: 10rem;" required>
               </div>
               <div class="col">
-                <input type="password" id="password" name="password" class="form-control" placeholder="password">
+                <input type="password" id="password" name="password" class="form-control" placeholder="password" style="border-radius: 10rem;" required>
               </div>
               <div class="col">
-                <button class="btn btn-primary" type="submit">Sign In</button>
+                <button class="btn btn-primary" type="submit" style="border-radius: 10rem;">Sign In</button>
               </div>
             </div>
           </form>

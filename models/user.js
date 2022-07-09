@@ -1,9 +1,17 @@
 const mongoose = require("mongoose");
 const passportLocalMongoose = require("passport-local-mongoose");
 const { postSchema } = require("./post");
+const findOrCreate = require("mongoose-findorcreate");
 
 //create schema 
 const userSchema = new mongoose.Schema({
+    googleId: {
+        type: String
+    },
+    provider: {
+        type: String,
+        require: true
+    },
     username: {
         type: String,
         minlength: 5
@@ -11,6 +19,9 @@ const userSchema = new mongoose.Schema({
     email: {
         type: String,
         required: true
+    },
+    profilePic: {
+        type: String
     },
     password: {
         type: String,
@@ -23,10 +34,10 @@ const userSchema = new mongoose.Schema({
         type: [postSchema]
     },  
     followers: {
-        type: [{userId: String, username: String, emailHash: String}]
+        type: [{userId: String, username: String, emailHash: String, profilePic: String}]
     },
     following: {
-        type: [{userId: String, username: String, emailHash: String}]
+        type: [{userId: String, username: String, emailHash: String, profilePic: String}]
     }
 });
 
@@ -39,6 +50,7 @@ userSchema.index({
 
 //plugin to userSchema
 userSchema.plugin(passportLocalMongoose);
+userSchema.plugin(findOrCreate);
 
 //export model
 var User = new mongoose.model("User", userSchema);
