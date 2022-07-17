@@ -7,8 +7,8 @@ const flash = require("connect-flash"); // for flash messages
 const session = require("express-session"); // session middleware
 const passport = require("passport");// authentication
 const { GoogleStrategyConfig, FacebookStrategyConfig, TwitterStrategyConfig } = require("./controllers/passportOAuthStrategies");// import login strategies
-// const findOrCreate = require("mongoose-findorcreate");// findOrCreate function
 const User = require("./models/user"); //import User model
+const Message = require("./models/messages"); // import Message model
 
 // import routes
 const homeRoutes = require("./routes/homeRoutes"); //import routes
@@ -16,6 +16,7 @@ const authenticationRoutes = require("./routes/authenticationRoutes");
 const dashboardRoutes = require("./routes/dashboardRoutes");
 const postRoutes = require("./routes/postRoutes");
 const userRoutes = require("./routes/userRoutes");
+const configSocketServer = require("./socketIO/socket_server");
 
 // express app
 const app = express();
@@ -74,12 +75,7 @@ app.use("/dashboard", dashboardRoutes);
 app.use("/posts", postRoutes);
 app.use("/users", userRoutes);
 
-// testing
-
-
-// app.listen(3000, ()=>{
-//     console.log("the app is running on port 3000");
-// });
+configSocketServer(http);
 
 http.listen(PORT, ()=>{
     console.log(`Server is running on port ${PORT}`);
@@ -87,14 +83,12 @@ http.listen(PORT, ()=>{
 
 
 
-// socket implementation
-const io = require("socket.io")(http);
 
-io.on("connection", (socket)=>{
-    console.log("Connected.......");
 
-    socket.on("newMessage", (msg)=>{
-        socket.broadcast.emit("newMessageReceiving", msg);
-    });
-});
+
+
+
+
+
+
 

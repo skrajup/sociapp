@@ -1,50 +1,22 @@
 const mongoose = require("mongoose");
 const passportLocalMongoose = require("passport-local-mongoose");
 const { postSchema } = require("./post");
-const findOrCreate = require("mongoose-findorcreate");
+// const findOrCreate = require("mongoose-findorcreate");
 
 //create schema 
 const userSchema = new mongoose.Schema({
-    googleId: {
-        type: String
-    },
-    facebookId: {
-        type: String
-    },
-    twitterId: {
-        type: String
-    },
-    provider: {
-        type: String,
-        require: true
-    },
-    username: {
-        type: String,
-        minlength: 5
-    },
-    email: {
-        type: String,
-        required: true
-    },
-    profilePic: {
-        type: String
-    },
-    password: {
-        type: String,
-        minlength: 8
-    },
-    emailHash: {
-        type: String
-    },
-    posts: {
-        type: [postSchema]
-    },  
-    followers: {
-        type: [{userId: String, username: String, emailHash: String, profilePic: String}]
-    },
-    following: {
-        type: [{userId: String, username: String, emailHash: String, profilePic: String}]
-    }
+    googleId: {type: String},
+    facebookId: {type: String},
+    twitterId: {type: String},
+    provider: {type: String, require: true},
+    username: {type: String, minlength: 5},
+    email: {type: String, required: true},
+    profilePic: {type: String},
+    password: {type: String, minlength: 8},
+    emailHash: {type: String},
+    posts: {type: [postSchema]},  
+    followers: {type: [{userId: String, username: String, emailHash: String, profilePic: String}]},
+    following: {type: [{userId: String, username: String, emailHash: String, profilePic: String}]}
 });
 
 // create index to perform full text search 
@@ -56,7 +28,7 @@ userSchema.index({
 
 //plugin to userSchema
 userSchema.plugin(passportLocalMongoose);
-userSchema.plugin(findOrCreate);
+// userSchema.plugin(findOrCreate);
 
 //export model
 var User = new mongoose.model("User", userSchema);

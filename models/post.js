@@ -4,48 +4,24 @@ const mongoose = require("mongoose");
 
 //create post schema
 const commenterSchema = new mongoose.Schema({
-                            username: String,
-                            email: String,
-                            time: {
-                                type: String
-                                // default: Date.now()
-                            },
-                            userId: mongoose.ObjectId
-                        });
-
+    username: String,
+    email: String,
+    time: String,
+    userId: mongoose.ObjectId
+});
 
 const commentSchema =   new mongoose.Schema({
-                            user: commenterSchema,
-                            body: {
-                                type: String,
-                                minlength: 5,
-                                required: true
-                            } 
-                        });
-
+    user: commenterSchema,
+    body: {type: String, minlength: 5, required: true} 
+});
 
 const postSchema =  new mongoose.Schema({
-                        title: {
-                            type: String,
-                            minlength: 10,
-                            required: true
-                        },
-                        body: {
-                            type: String,
-                            minlength: 10,
-                            required: true
-                        },
-                        postedOn: {
-                            type: String,
-                            // default: new Date().toLocaleDateString(),
-                            required: true
-                        },
-                        postedBy: {
-                            type: mongoose.ObjectId,
-                            required: true
-                        },
-                        comments: [commentSchema]
-                    });    
+    title: {type: String, minlength: 10, required: true},
+    body: {type: String, minlength: 10, required: true},
+    postedOn: {type: String, required: true},
+    postedBy: {type: mongoose.ObjectId, required: true},
+    comments: [commentSchema] 
+});    
 
 // create indexes to perform full text search
 // we will search in post title, post body, username
