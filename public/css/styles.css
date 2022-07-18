@@ -425,17 +425,17 @@ a {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    max-width: 90%;
+    max-width: 70%;
     margin: 2rem auto;
     border: 1.5px solid #62118a;
+    border-width: 1px 0;
     font-size: 13px;
 }
 
 .users {
     flex-basis: 30%;
     flex-grow: 1;
-    /* border-right: 1.5px solid #62118a; */
-    background: linear-gradient(to right, #93f9b9, #93f9b9); 
+    background: #93f9b9; 
 }
 
 .users > h5 {
@@ -446,7 +446,7 @@ a {
 }
 
 .online {
-    background: #49e102;
+    background: #32810d;
     color: rgb(41, 41, 41);
 }
 
@@ -457,7 +457,7 @@ a {
 
 .users > ul {
     list-style-type: none;
-    height: auto;
+    max-height: 490px;
     margin: 0;
     padding: 0;
     overflow-y: scroll;
@@ -472,6 +472,16 @@ a {
     width: 100%;
     padding: 10px;
     text-align: left;
+    color: #ffffff;
+    font-weight: 600;
+    border-bottom: #94ff84 solid .2px;
+    box-shadow: 0 1px 2px greenyellow;
+}
+
+.users > ul > li > button:hover {
+    background: rgb(0, 217, 0);
+    color: #000;
+    transition:ease 0.5s;
 }
 
 /* .users > ul > li > button > img {
@@ -490,16 +500,22 @@ a {
     position: relative;
 }
 
-/* hide scroll bar */
-.users > ul, .chat-panel-wrapper {
-     /* hide scroll bar */
-    -ms-overflow-style: none;  
-    scrollbar-width: none;  
-} 
+.users > ul::-webkit-scrollbar {
+    display: none;
+}
 
-/* hide scroll bar */
-.users > ul::-webkit-scrollbar, .chat-panel-wrapper::-webkit-scrollbar { 
-    display: none;  /* Safari and Chrome */
+/* customize scroll bar */
+:is(.chat-panel-wrapper)::-webkit-scrollbar{ 
+    width: 8px;
+}
+
+.chat-panel-wrapper::-webkit-scrollbar-track {
+    background:  #62118a;
+}
+
+.chat-panel-wrapper::-webkit-scrollbar-thumb {
+    background: #cf70ff;
+    min-height: 50px;
 }
 
 .panel-head {
