@@ -1,5 +1,6 @@
 const { ObjectId } = require("mongodb");
 const mongoose = require("mongoose");
+// const passportLocalMongoose = require("passport-local-mongoose");
 
 //create post schema
 const commenterSchema = new mongoose.Schema({
