@@ -1,6 +1,6 @@
 const Message = require("../models/messages");
 
-console.log("socket setup executed");
+console.log("Socket setup executed");
 function configSocketServer(http){ 
     // socket implementation
     const io = require("socket.io")(http);
@@ -8,7 +8,7 @@ function configSocketServer(http){
     var users = [];
 
     io.on("connection", (socket)=>{
-        console.log("user-connected: " + socket.id);
+        // console.log("user-connected: " + socket.id);
         socket.on("user_connected", (username) => {
             // send all online clients list back to this client
             io.to(socket.id).emit("online_clients", Object.keys(users));
@@ -34,7 +34,7 @@ function configSocketServer(http){
 
             msg.save()
                 .then(()=>{
-                    console.log("message saved");
+                    // console.log("message saved");
                     // send event to receiver
                     // change message type
                     data.type = "incoming";
@@ -74,7 +74,7 @@ function configSocketServer(http){
 
             // inform all active clients to update connected clients
             socket.broadcast.emit("users_updated", userKeyToRemove);
-            console.log(userKeyToRemove, " left the chat");      
+            // console.log(userKeyToRemove, " left the chat");      
         });
 
         // listen from client for typing status

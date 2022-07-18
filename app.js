@@ -8,7 +8,6 @@ const session = require("express-session"); // session middleware
 const passport = require("passport");// authentication
 const { GoogleStrategyConfig, FacebookStrategyConfig, TwitterStrategyConfig } = require("./controllers/passportOAuthStrategies");// import login strategies
 const User = require("./models/user"); //import User model
-const Message = require("./models/messages"); // import Message model
 
 // import routes
 const homeRoutes = require("./routes/homeRoutes"); //import routes
@@ -75,6 +74,7 @@ app.use("/dashboard", dashboardRoutes);
 app.use("/posts", postRoutes);
 app.use("/users", userRoutes);
 
+// configure socket on server side
 configSocketServer(http);
 
 http.listen(PORT, ()=>{

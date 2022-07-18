@@ -4,7 +4,7 @@
   "description": "a social media app made using nodejs expressjs mongodb",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon app"
   },
   "repository": {
     "type": "git",
@@ -46,5 +46,9 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.19"
+  },
+  "engines": {
+    "node": "16.x",
+    "npm": "8.x"
   }
 }

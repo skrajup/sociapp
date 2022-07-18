@@ -15,16 +15,19 @@ body {
     /* font-family: 'Roboto', sans-serif; */
     /* font-family: 'Lato', sans-serif;
     letter-spacing: 0.05rem; */
-    /* font-family: 'Abhaya Libre', serif; */
-    font-family: 'Merriweather', serif;
-    /* background: linear-gradient(to right, #24243e, #302b63, #0f0c29); */
-    overflow-y: scroll;
+    font-family: 'Abhaya Libre', serif;
+    /* font-family: 'Merriweather', serif; */
 }
 
 /* homepage styles */
 .custom-container {
     width: 100%;
     margin: auto;
+    background-color: #FFDEE9;
+background-image: linear-gradient(0deg, #FFDEE9 0%, #B5FFFC 100%);
+
+
+
 }
 
 .navbar {
@@ -40,14 +43,10 @@ body {
 }
 
 .bg {
-    background-image: url("/images/bg4.jpg");
+    background-image: url("/images/bg3.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-
-    /* background: #0f0c29; 
-    background: -webkit-linear-gradient(to right, #24243e, #302b63, #0f0c29);  
-    background: linear-gradient(to right, #24243e, #302b63, #0f0c29); */
     color: aliceblue;
 }
 
@@ -167,10 +166,25 @@ body {
     border-radius: 50%;
 }
 
+.card-header {
+    background-color: darkturquoise;
+}
+
+.card-body {
+    background-color: lightcyan;
+}
+
 /* home dashboard styles */
 .home-dashboard-content {
-    padding: 20px 100px;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px;
+    min-height: 300px;
+}
+
+.latest-heading {
+    margin-bottom: 20px;
 }
 
 /* media queries */
@@ -230,12 +244,13 @@ a {
 .delete {
     padding: 5px 10px;
     font-size: x-large;
+    color: #860404;
+    border-radius: 50%;
 }
 
 .delete:hover {
     background: #ccc;
-    border-radius: 50%;
-    transition: 0.3s ease-in;
+    transition: 0.2s ease-in;
 }
 
 /* 404-content */
@@ -255,7 +270,6 @@ a {
 
 /* profile page post section */
 .user-posts-container {
-    /* height: 500px; */
     overflow-y: scroll;
 }
 
@@ -282,48 +296,20 @@ a {
     cursor: pointer;
 }
 
-.user-post > h5 > a:hover{
-    color: #04006cc5;
-}
-
 .user-post:hover {
     color: #1d5d00;
     background:#fff;
 }
 
 .custom-post-title-font {
-    font-size: medium;
+    font-size: 1rem;
 }
 .custom-post-content-font {
-    font-size: x-small;
+    font-size: 0.75rem;
 }
 .custom-read-more-btn {
-    font-size: xx-small;
+    font-size: x-small;
 }
-
-/* message, error message, success message */
-/* .message {
-    z-index: 1;
-    position: absolute;
-    top: 80%;
-    width: auto;
-    text-align: center;
-    padding: 10px;
-} */
-/* .success-message {
-    background: #16a100;
-    color: rgb(245, 245, 245);
-} */
-
-/* .message-content {
-    margin-bottom: 0;
-    font-weight: 700;
-}
-
-.error-message {
-    background: #a10000;
-    color: rgb(245, 245, 245);
-} */
 
 /* followers/ followings */
 .followering-profiles {
@@ -425,8 +411,7 @@ a {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    max-width: 70%;
-    margin: 2rem auto;
+    margin: 2rem;
     border: 1.5px solid #62118a;
     border-width: 1px 0;
     font-size: 13px;
@@ -436,6 +421,7 @@ a {
     flex-basis: 30%;
     flex-grow: 1;
     background: #93f9b9; 
+    background-image: radial-gradient( circle farthest-corner at 22.4% 21.7%, rgba(4,189,228,1) 0%, rgba(2,83,185,1) 100.2% );
 }
 
 .users > h5 {
@@ -490,7 +476,8 @@ a {
 
 .chat-panel {
     flex-basis: 70%;
-    background: linear-gradient(to right, #2980b9, #2980b9);
+    background-color: #21D4FD;
+    background-image: radial-gradient( circle farthest-corner at 22.4% 21.7%, rgba(4,189,228,1) 0%, rgba(2,83,185,1) 100.2% );
 }
 
 .chat-panel-wrapper {
@@ -662,6 +649,10 @@ a {
     .users, .chat-panel {
         flex-basis: 100%;
     }
+    .chat-container {
+        width: 100%;
+        margin: 1rem 5px;
+    }
   }
 
 
@@ -684,4 +675,3 @@ a {
 
 
 /* homepage attricbute png */
-/* <a href='https://www.freepik.com/vectors/memphis-shapes'>Memphis shapes vector created by starline - www.freepik.com</a> */

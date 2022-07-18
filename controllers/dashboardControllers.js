@@ -2,6 +2,7 @@ const { Post } = require("../models/post"); //Post model
 const User = require("../models/user");
 
 
+var posts = [];
 const dashboard_index = (req, res)=>{
     // The below line was added so we couldn't display the "/home-dashboard" page
     // after we logged out using the "back" button of the browser, which
@@ -11,7 +12,61 @@ const dashboard_index = (req, res)=>{
         'Cache-Control',
         'no-cache, private, no-store, must-revalidate, max-stal e=0, post-check=0, pre-check=0'
     );
-    res.render("dashboard", {user: req.user, successMsg: req.flash("successMsg"), errorMsg: req.flash("errorMsg")});
+
+    fetchUserPosts(req.user)
+        .then(docs => {
+            posts = docs;
+            res.render("dashboard", {user: req.user, posts: posts, successMsg: req.flash("successMsg"), errorMsg: req.flash("errorMsg")});
+            // console.log(posts);
+        })
+        .catch(err => {
+            console.log(err);
+            res.render("dashboard", {user: req.user, posts: posts, successMsg: req.flash("successMsg"), errorMsg: req.flash("errorMsg")});
+        })
+    
+    // console.log(posts);
+}
+
+const fetchPosts = async function (userId, postPerUser) {  
+    var posts = [];
+    await User.findOne({_id: userId})
+        .then(user => {
+            if(user){
+                // console.log(user.username);
+                posts = posts.concat(user.posts.sort((p1, p2) => (p1.date > p2.date) ? -1: 1).slice(0, postPerUser));
+                // console.log(posts);
+            }
+        })
+        .catch(err=>{
+            console.log(err);
+            return err;
+        });
+    
+    return posts;
+}
+
+const fetchUserPosts = async function (user) { 
+    // fetch posts of users that logged in user follows
+    var posts = [];
+    var limit = 20;
+    var followingLen = user.following.length;
+    var postPerUser = Math.floor(limit/followingLen);
+    var i = 0;
+    var following = user.following;
+    for(var user of following){
+        var userPosts = await fetchPosts(user.userId, postPerUser);
+        // console.log(userPosts);
+
+        posts = posts.concat(userPosts);
+        // console.log("in", i);
+        // i++;
+    }; 
+
+    // console.log(posts);
+    // console.log("out", i);
+    // i++;
+
+    return posts;
 }
 // search panel requests
 var usersFound = [];
@@ -69,10 +124,12 @@ const dashboard_create_post = (req, res)=>{
         'no-cache, private, no-store, must-revalidate, max-stal e=0, post-check=0, pre-check=0'
     );
     const newPost = new Post({
+        username: req.user.username,
         title: req.body.title,
         body: req.body.postContent,
         postedOn: new Date().toLocaleDateString(),
-        postedBy: req.user._id
+        postedBy: req.user._id,
+        date: new Date()
     });
     // console.log(newPost);
 

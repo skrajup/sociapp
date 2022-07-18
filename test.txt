@@ -1,2 +1,14 @@
-user khud ka refresh krne par jud jata ha
-how to remove once user unload?
+// issues
+
+
+
+
+
+
+
+// learning
+-- best use of async await on dashboard follwing posts fetching
+-- see dashboardController.js the controller dashboard_index: i learned the use of async and await
+-- strange comments are used for just testing async and await
+
+

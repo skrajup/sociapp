@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 const passportLocalMongoose = require("passport-local-mongoose");
 const { postSchema } = require("./post");
-// const findOrCreate = require("mongoose-findorcreate");
 
 //create schema 
 const userSchema = new mongoose.Schema({
@@ -28,7 +27,6 @@ userSchema.index({
 
 //plugin to userSchema
 userSchema.plugin(passportLocalMongoose);
-// userSchema.plugin(findOrCreate);
 
 //export model
 var User = new mongoose.model("User", userSchema);

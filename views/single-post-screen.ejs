@@ -10,12 +10,12 @@
               <div class="post-head-left">
                 <h2><%=post.title%></h2>
                 <!-- class = post-writer-name in anchor tag -->
-                <p><b>Posted by</b> <a href="/users/<%=post.postedBy%>" class="badge bg-warning"><%=poster_name%></a> on <%=post.postedOn%></p>
+                <p><b>Posted by</b> <a href="/users/<%=post.postedBy%>" class="badge bg-dark"><%=poster_name%></a> on <%=post.postedOn%></p>
               </div>
               <div class="post-head-right">
                 <% if((post.postedBy).toString() === loggedId.toString()){ %>
                 <a class="edit m-3" href="/posts/<%=post._id%>/update">edit</a>
-                <a class="delete" href="/posts/<%=post._id%>/delete"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                <a class="delete" href="/posts/<%=post._id%>/delete"><i class="fa-solid fa-trash-can"></i></a>
                 <% } %>
               </div>
             </div>

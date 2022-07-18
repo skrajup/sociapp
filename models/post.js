@@ -1,6 +1,5 @@
 const { ObjectId } = require("mongodb");
 const mongoose = require("mongoose");
-// const passportLocalMongoose = require("passport-local-mongoose");
 
 //create post schema
 const commenterSchema = new mongoose.Schema({
@@ -16,11 +15,13 @@ const commentSchema =   new mongoose.Schema({
 });
 
 const postSchema =  new mongoose.Schema({
-    title: {type: String, minlength: 10, required: true},
+    username: {type: String, required: true},
+    title: {type: String, minlength: 1, required: true},
     body: {type: String, minlength: 10, required: true},
     postedOn: {type: String, required: true},
     postedBy: {type: mongoose.ObjectId, required: true},
-    comments: [commentSchema] 
+    comments: [commentSchema],
+    date: {type: Date, required: true}
 });    
 
 // create indexes to perform full text search
@@ -29,11 +30,6 @@ postSchema.index({
     title: "text",
     body: "text"
 });
-
-// plugin to Schemas
-// commenterSchema.plugin(passportLocalMongoose);
-// commentSchema.plugin(passportLocalMongoose);
-// postSchema.plugin(passportLocalMongoose);
 
 //models
 const Post = new mongoose.model("Post", postSchema);

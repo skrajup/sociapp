@@ -15,7 +15,7 @@ const posts_id_get = (req, res)=>{
     }else{
         Post.findOne({_id: ObjectId(req.params.id)}, (err, post)=>{
             if(err){
-                // console.log(err);
+                console.log(err);
                 req.flash("errorMsg", "Requested post is not found!!!");
                 res.redirect("/404");
             }else{

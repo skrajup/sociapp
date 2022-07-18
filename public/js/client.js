@@ -9,6 +9,7 @@ let connectedUsers = document.querySelector(".users > ul");
 let myStatus = document.querySelector(".users > h5");
 let selected = document.querySelector("#user");
 let indicator = document.querySelector("#typing-status");
+let msgInputField = document.querySelector("#chat_msg");
 
 let username = "";
 let sender = "";
@@ -42,13 +43,7 @@ function scrollToBottom() {
     chatPanelWrapper.scrollTop = chatPanelWrapper.scrollHeight;
 }
 
-// listen from server when a new user connected
-socket.on("user_connected", (username) => {
-    if(sender != ""){
-        updateUsers(username);
-    }
-});
-
+// register user 
 const enterName = () => {
     // get the username
     username = userForm.username.value;
@@ -73,19 +68,6 @@ const enterName = () => {
     return false;
 }
 
-socket.on("online_clients", (users) => {
-    users.forEach(user => {
-        let markup = `
-        <li>
-            <button onclick="onUserSelected(this.textContent.trim());" class="online">
-                <span>${user}</span>
-            </button>
-        </li>
-        `;
-        connectedUsers.innerHTML = markup + connectedUsers.innerHTML;
-    });
-});
-
 const onUserSelected = (username) => {  
     // save selected user in global variable
     receiver = username;
@@ -93,6 +75,7 @@ const onUserSelected = (username) => {
     // tell the server to load all prev msg from database
     socket.emit("user_selected", {receiver: receiver, sender: sender});
 }
+
 
 const sendMessage = () => {  
     // get the message 
@@ -122,34 +105,6 @@ const sendMessage = () => {
     // prevent form from submitting
     return false;
 }
-
-// listen froms server for new_message
-socket.on("new_message", (data) => {
-    // append received message
-    if(receiver === data.sender)
-        appendMessage(data);
-});
-
-// listen from server for selected client msg data
-socket.on("messages_data", (data) => {
-    // set status of receiver
-    indicator.textContent = data.status;
-    msgTable.innerHTML = ``;
-    data.docs.forEach(message => {
-        if(message.sender === sender){
-            message.type = "outgoing";
-        }else{
-            message.type = "incoming";
-        }
-        appendMessage(message);
-    });
-});
-
-socket.on("users_updated", (removed) => {
-    if(removed != null){
-        updateUsers(removed);
-    }
-});
 
 const updateUsers = (concerning_user) => {  
     // html collection of all list items: .froEach is not applicable
@@ -189,9 +144,57 @@ const addNewUser = (concerning_user) => {
     }
 }
 
-// someone is typing
-let msgInputField = document.querySelector("#chat_msg");
+// handle socket events----------------------------------------------
 
+// listen from server when a new user connected
+socket.on("user_connected", (username) => {
+    if(sender != ""){
+        updateUsers(username);
+    }
+});
+
+socket.on("online_clients", (users) => {
+    users.forEach(user => {
+        let markup = `
+        <li>
+            <button onclick="onUserSelected(this.textContent.trim());" class="online">
+                <span>${user}</span>
+            </button>
+        </li>
+        `;
+        connectedUsers.innerHTML = markup + connectedUsers.innerHTML;
+    });
+});
+
+// listen froms server for new_message
+socket.on("new_message", (data) => {
+    // append received message
+    if(receiver === data.sender)
+        appendMessage(data);
+});
+
+// listen from server for selected client msg data
+socket.on("messages_data", (data) => {
+    // set status of receiver
+    indicator.textContent = data.status;
+    msgTable.innerHTML = ``;
+    data.docs.forEach(message => {
+        if(message.sender === sender){
+            message.type = "outgoing";
+        }else{
+            message.type = "incoming";
+        }
+        appendMessage(message);
+    });
+});
+
+socket.on("users_updated", (removed) => {
+    if(removed != null){
+        updateUsers(removed);
+    }
+});
+
+// someone is typing
 msgInputField.addEventListener("keyup", ()=>{
     socket.emit("typing", {sender: sender, receiver: receiver}); 
 });
