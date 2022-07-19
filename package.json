@@ -4,7 +4,7 @@
   "description": "a social media app made using nodejs expressjs mongodb",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "nodemon app.js"
   },
   "repository": {
     "type": "git",
