@@ -35,7 +35,7 @@ function GoogleStrategyConfig() {
 
                     newUser.save()  // save user credentials into the database
                         .then(ack=>{
-                            console.log(ack);
+                            // console.log(ack);
                             return cb(null, newUser);
                         })
                         .catch(err=>{
@@ -78,7 +78,7 @@ function FacebookStrategyConfig() {
 
                     newUser.save()  // save user credentials into the database
                         .then(ack=>{
-                            console.log(ack);
+                            // console.log(ack);
                             return cb(null, newUser);
                         })
                         .catch(err=>{
@@ -120,7 +120,7 @@ function TwitterStrategyConfig() {
 
                     newUser.save()  // save user credentials into the database
                         .then(ack=>{
-                            console.log(ack);
+                            // console.log(ack);
                             return cb(null, newUser);
                         })
                         .catch(err=>{
