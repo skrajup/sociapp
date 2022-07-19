@@ -3,7 +3,7 @@ social media app made with the help of NodeJS, ExpressJS, MongoDB, Template Engi
 
 ## Screenshots depicting the product
 
-### Homepage: sigin, signup
+### Homepage: signin, signup
 ![image](https://user-images.githubusercontent.com/95043790/179776897-f1ee0d86-6743-4eeb-9125-f1956d03b876.png)
 
 ### User Dashboard
