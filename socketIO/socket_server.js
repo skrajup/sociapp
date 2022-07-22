@@ -1,4 +1,5 @@
 const Message = require("../models/messages");
+const User = require("../models/user");
 
 console.log("Socket setup executed");
 function configSocketServer(http){ 
@@ -18,7 +19,7 @@ function configSocketServer(http){
             users[username] = socket.id;
 
             // notify all connected clients except sender itself
-            socket.broadcast.emit("user_connected", username);
+            socket.broadcast.emit("user_connected", {user: username});
         });
 
         // listen from client
@@ -32,6 +33,10 @@ function configSocketServer(http){
                 type: data.type,
                 time: data.time
             });
+
+            if(data.receiver in users){ // if user is online
+                msg.status = true;
+            }
 
             // save message data in database
             msg.save()
@@ -65,21 +70,44 @@ function configSocketServer(http){
 
         // listen from client that user is selected as receiver
         socket.on("user_selected", (data) => {
-            Message.find({$or: [{sender: data.sender, receiver: data.receiver}, {sender: data.receiver, receiver: data.sender}]})
-                .then(docs => {
-                    if(docs){
-                        let senderSocketId = users[data.sender];
-                        let receiverSocketId = users[data.receiver];
-                        let receiver_status;
-                        (data.receiver in users) ? receiver_status = "online" : receiver_status = "offline";
-                        // user is selected for chat > means all msg are seen now
-                        for(let doc of docs){
-                            doc.status = (doc.status === false) ? true : false;
-                        }
-                        // notify sender & receiver both to let them know that all messages are seen
-                        io.to(senderSocketId).emit("messages_data", {docs: docs, receiver_status: receiver_status});
-                        io.to(receiverSocketId).emit("seen_by_receiver", {docs: docs, sender: data.sender});
-                    }
+            let filterForFind = {$or: [{sender: data.sender, receiver: data.receiver}, {sender: data.receiver, receiver: data.sender}]};
+            let filterForUpdate = {sender: data.receiver, receiver: data.sender};
+            let update = { status: true };
+
+            // update all incoming messages status to "seen"
+            Message.updateMany(filterForUpdate, update)
+                .then(()=>{
+                    Message.find(filterForFind)
+                        .then(docs => {
+                            if(docs){
+                                let senderSocketId = users[data.sender];
+                                let receiverSocketId = users[data.receiver];
+                                let receiver_status;
+                                
+                                if(data.receiver in users){
+                                    receiver_status = "online"
+                                    io.to(senderSocketId).emit("messages_data", {docs: docs, receiver_status: receiver_status});
+                                    // notify receiver to let them know that all messages are seen
+                                    io.to(receiverSocketId).emit("seen_by_receiver", {docs: docs, sender: data.sender});
+                                }else {
+                                    User.findOne({username: data.receiver})
+                                        .then(user => {
+                                            if(user){
+                                                io.to(senderSocketId).emit("messages_data", {docs: docs, receiver_status: user.last_seen});
+                                                // notify receiver to let them know that all messages are seen
+                                                io.to(receiverSocketId).emit("seen_by_receiver", {docs: docs, sender: data.sender});
+                                            }else{
+                                                console.log("error: receiver not in db!!!");
+                                            }
+                                        })
+                                        .catch(err => {
+                                            console.log(err);
+                                        });
+                                } 
+                            }
+                        }).catch(err => {
+                            console.log(err);
+                        });
                 }).catch(err => {
                     console.log(err);
                 });
@@ -88,11 +116,21 @@ function configSocketServer(http){
         socket.on("disconnect", () => {
             // find in users array 
             var userKeyToRemove = getKeyByValue(users, socket.id);
-            delete users[userKeyToRemove];    
+            var now = new Date();
+            var time = now.toLocaleTimeString()+", "+now.toLocaleDateString();
+            // store user's last seen time
+            User.updateOne({username: userKeyToRemove}, {last_seen: time})
+                .then(()=>{
+                    // delete from active users list
+                    delete users[userKeyToRemove];    
 
-            // inform all active clients to update connected clients
-            socket.broadcast.emit("users_updated", userKeyToRemove);
-            // console.log(userKeyToRemove, " left the chat");      
+                    // inform all active clients to update connected clients
+                    socket.broadcast.emit("users_updated", {user: userKeyToRemove, last_seen: time});
+                    // console.log(userKeyToRemove, " left the chat");  
+                })
+                .catch(err=>{
+                    console.log(err);
+                });
         });
 
         // listen from client for typing status

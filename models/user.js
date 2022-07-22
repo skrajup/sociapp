@@ -15,7 +15,8 @@ const userSchema = new mongoose.Schema({
     emailHash: {type: String},
     posts: {type: [postSchema]},  
     followers: {type: [{userId: String, username: String, emailHash: String, profilePic: String}]},
-    following: {type: [{userId: String, username: String, emailHash: String, profilePic: String}]}
+    following: {type: [{userId: String, username: String, emailHash: String, profilePic: String}]},
+    last_seen: {type: String}
 });
 
 // create index to perform full text search 

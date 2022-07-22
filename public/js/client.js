@@ -113,7 +113,7 @@ const sendMessage = () => {
     return false;
 }
 
-const updateUsers = (concerning_user) => {  
+const updateUsers = (data) => {  
     // html collection of all list items: .froEach is not applicable
     // convert to array to use .forEach
     let allUsers = Array.from(connectedUsers.children);
@@ -121,7 +121,7 @@ const updateUsers = (concerning_user) => {
     let index = allUsers.findIndex(user => {
         // each li item
         let username = user.children[0].textContent.trim();// first button textContent
-        return (username === concerning_user)
+        return (username === data.user)
     });
 
     if(index != -1){
@@ -129,12 +129,12 @@ const updateUsers = (concerning_user) => {
         let button = allUsers[index].children[0];
         const check = button.classList.toggle("offline");
         // check===true means online to offline o/t vice versa
-        if(concerning_user === receiver){
-            indicator.textContent = (check) ? `offline` : `online`;
+        if(data.user === receiver){
+            indicator.textContent = (check) ? `last seen at ${data.last_seen}` : `online`;
         }
     }else{
         // new user detected
-        addNewUser(concerning_user);
+        addNewUser(data.user);
     }    
 }
 
@@ -154,9 +154,9 @@ const addNewUser = (concerning_user) => {
 // handle socket events----------------------------------------------
 
 // listen from server when a new user connected
-socket.on("user_connected", (username) => {
+socket.on("user_connected", (data) => {
     if(sender != ""){
-        updateUsers(username);
+        updateUsers(data);
     }
 });
 
@@ -183,7 +183,7 @@ socket.on("new_message", (data) => {
 // listen from server for selected client msg data
 socket.on("messages_data", (data) => {
     // set status of receiver
-    indicator.textContent = data.receiver_status;
+    indicator.textContent = (data.receiver_status === "online") ? "online" : `last seen at ${data.receiver_status}`;
     msgTable.innerHTML = ``;
     data.docs.forEach(message => {
         if(message.sender != sender){
@@ -219,9 +219,9 @@ socket.on("seen_or_not", (data) => {
     }
 });
 
-socket.on("users_updated", (removed) => {
-    if(removed != null){
-        updateUsers(removed);
+socket.on("users_updated", (data) => {
+    if(data.user != null){
+        updateUsers(data);
     }
 });
 

@@ -1,5 +1,6 @@
 // issues
 if user is online but not selected to chat, even then if any user sends message renders as seen on that side, which is not supposed to be!!!
+if any message in above condn is unseen and after that messages are seen => user did not selected you to chat
 
 
 
