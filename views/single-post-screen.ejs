@@ -14,7 +14,7 @@
               </div>
               <div class="post-head-right">
                 <% if((post.postedBy).toString() === loggedId.toString()){ %>
-                <a class="edit m-3" href="/posts/<%=post._id%>/update">edit</a>
+                <a class="edit" href="/posts/<%=post._id%>/update">edit</a>
                 <a class="delete" href="/posts/<%=post._id%>/delete"><i class="fa-solid fa-trash-can"></i></a>
                 <% } %>
               </div>
