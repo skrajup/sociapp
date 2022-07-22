@@ -14,6 +14,7 @@ let msgInputField = document.querySelector("#chat_msg");
 let username = "";
 let sender = "";
 let receiver = "";
+let msg = {};
 
 function appendMessage(data){
     // create a list item and add message content to it
@@ -23,9 +24,16 @@ function appendMessage(data){
 
     if(data.type === "outgoing"){
         // msg markup
-        let outgoingMarkup = `
-            <span class="chat-msg-text">${data.message} <br><span class="msg-time">${data.time}</span></span>
-        `;
+        let outgoingMarkup;
+        if(data.status === true){
+            outgoingMarkup = `
+                <span class="chat-msg-text">${data.message} <br><span class="msg-time">${data.time}</span><br><span class="msg-status"><i class="fa-solid fa-circle-check" title="seen"></i></span></span>
+            `;
+        }else{
+            outgoingMarkup = `
+                <span class="chat-msg-text">${data.message} <br><span class="msg-time">${data.time}</span><br><span class="msg-status"><i class="fa-regular fa-circle-check" title="not seen"></i></span></span>
+            `;
+        }
         li.innerHTML = outgoingMarkup;
     }else{
         let incomingMarkup = `
@@ -81,10 +89,11 @@ const sendMessage = () => {
     // get the message 
     let message = chatMsgForm.chat_msg.value;
     let now = new Date();
-    let msg = {
+    msg = {
         sender: sender,
         receiver: receiver,
         message: message,
+        status: false,
         type: "outgoing",
         time: now.toLocaleTimeString()+", "+now.toLocaleDateString()
     }
@@ -93,9 +102,6 @@ const sendMessage = () => {
     if(receiver != ""){
         // send to server
         socket.emit("send_message", msg);
-        // append own message
-        if(message.length!=0)
-            appendMessage(msg);
     }else{
         console.log("select user");
     }
@@ -177,16 +183,40 @@ socket.on("new_message", (data) => {
 // listen from server for selected client msg data
 socket.on("messages_data", (data) => {
     // set status of receiver
-    indicator.textContent = data.status;
+    indicator.textContent = data.receiver_status;
     msgTable.innerHTML = ``;
     data.docs.forEach(message => {
-        if(message.sender === sender){
-            message.type = "outgoing";
-        }else{
+        if(message.sender != sender){
             message.type = "incoming";
         }
         appendMessage(message);
     });
+});
+
+// listen from server for receiver has selected you
+socket.on("seen_by_receiver", (data) => {
+    // if sender is receiver currently
+    if(data.sender === receiver){
+        msgTable.innerHTML = ``;
+        data.docs.forEach(message => {
+            if(message.sender != sender){
+                message.type = "incoming";
+            }
+            appendMessage(message);
+        });
+    }
+});
+
+// message is seen
+socket.on("seen_or_not", (data) => {
+    // if seen
+    if(data.status === true){
+        msg.status = true;
+        appendMessage(msg);
+    }else{
+        // default status: false
+        appendMessage(msg);
+    }
 });
 
 socket.on("users_updated", (removed) => {

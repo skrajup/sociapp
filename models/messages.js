@@ -4,7 +4,8 @@ const mongoose = require("mongoose");
 const messageSchema = new mongoose.Schema({
     sender: {type: String, required: true},
     receiver: {type: String, required: true},
-    message: {type: String, required: true, minlength: 1},
+    message: {type: String, required: true},
+    status: {type: Boolean, required: true},
     type: {type: String, reuired: true},
     time: {type: String, required: true}
 });

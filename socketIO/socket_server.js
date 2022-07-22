@@ -28,10 +28,12 @@ function configSocketServer(http){
                 sender: data.sender,
                 receiver: data.receiver,
                 message: data.message,
+                status: data.status,
                 type: data.type,
                 time: data.time
             });
 
+            // save message data in database
             msg.save()
                 .then(()=>{
                     // console.log("message saved");
@@ -39,11 +41,21 @@ function configSocketServer(http){
                     // change message type
                     data.type = "incoming";
 
+                    // if receiver is still online
                     if(data.receiver in users){
-                        let socketId = users[data.receiver];
-                        io.to(socketId).emit("new_message", data);
+                        // send event to the receiver to render the msg to his/her screen
+                        let receiverSocketId = users[data.receiver];
+                        io.to(receiverSocketId).emit("new_message", data);
+                        // as receiver recived and render the msg successfully on their screen
+                        // notify the sender about the message status as message "seen"
+                        let senderSocketId = users[data.sender];
+                        io.to(senderSocketId).emit("seen_or_not", {status: true});
                     }else{
                         console.log("but user is offline right now");
+                        // as receiver is offline
+                        // notify the sender about the message status as message "unseen"
+                        let senderSocketId = users[data.sender];
+                        io.to(senderSocketId).emit("seen_or_not", {status: false});
                     }
                 })
                 .catch(err=>{
@@ -56,10 +68,17 @@ function configSocketServer(http){
             Message.find({$or: [{sender: data.sender, receiver: data.receiver}, {sender: data.receiver, receiver: data.sender}]})
                 .then(docs => {
                     if(docs){
-                        let socketId = users[data.sender];
-                        let status;
-                        (data.receiver in users) ? status = "online" : status = "offline";
-                        io.to(socketId).emit("messages_data", {docs: docs, status: status});
+                        let senderSocketId = users[data.sender];
+                        let receiverSocketId = users[data.receiver];
+                        let receiver_status;
+                        (data.receiver in users) ? receiver_status = "online" : receiver_status = "offline";
+                        // user is selected for chat > means all msg are seen now
+                        for(let doc of docs){
+                            doc.status = (doc.status === false) ? true : false;
+                        }
+                        // notify sender & receiver both to let them know that all messages are seen
+                        io.to(senderSocketId).emit("messages_data", {docs: docs, receiver_status: receiver_status});
+                        io.to(receiverSocketId).emit("seen_by_receiver", {docs: docs, sender: data.sender});
                     }
                 }).catch(err => {
                     console.log(err);

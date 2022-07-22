@@ -196,7 +196,7 @@ background-image: linear-gradient(0deg, #FFDEE9 0%, #B5FFFC 100%);
     }
 
     .wid-80{
-        width: 100%;
+        width: 95%;
     }
 }
 
@@ -569,6 +569,10 @@ a {
     color: #515151;
     background: transparent;
     border-radius: 0.2rem 0 0.2rem 0;
+}
+
+.msg-status > .fa-solid {
+    color: #32810d;
 }
 
 .incoming {

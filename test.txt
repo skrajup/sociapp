@@ -1,4 +1,5 @@
 // issues
+if user is online but not selected to chat, even then if any user sends message renders as seen on that side, which is not supposed to be!!!
 
 
 
