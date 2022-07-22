@@ -47,8 +47,7 @@ function configSocketServer(http){
                     }
                 })
                 .catch(err=>{
-                    console.log(err);
-                    console.log("select a user to send message");
+                    console.log(err.errors.message.properties.message);
                 });
         });
 

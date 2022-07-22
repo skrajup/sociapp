@@ -94,7 +94,8 @@ const sendMessage = () => {
         // send to server
         socket.emit("send_message", msg);
         // append own message
-        appendMessage(msg);
+        if(message.length!=0)
+            appendMessage(msg);
     }else{
         console.log("select user");
     }
