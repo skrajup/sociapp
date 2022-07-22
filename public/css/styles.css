@@ -39,11 +39,11 @@ body {
 }
 
 .bg {
-    background-image: url("/images/bg3.jpg");
+    /* background-image: url("/images/bg3.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    color: aliceblue;
+    color: aliceblue; */
 }
 
 .custom-flex {
@@ -93,10 +93,6 @@ body {
     border-radius: 50%;
     border: 1px solid rgb(1, 36, 104);
     box-shadow: 0 0 5px #ccc;
-}
-
-.logo > h6 {
-    color:antiquewhite;
 }
 
 .separator {
