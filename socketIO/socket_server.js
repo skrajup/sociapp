@@ -1,5 +1,6 @@
 const Message = require("../models/messages");
 const User = require("../models/user");
+const moment = require("moment");
 
 console.log("Socket setup executed");
 function configSocketServer(http){ 
@@ -116,8 +117,7 @@ function configSocketServer(http){
         socket.on("disconnect", () => {
             // find in users array 
             var userKeyToRemove = getKeyByValue(users, socket.id);
-            var now = new Date();
-            var time = now.toLocaleTimeString()+", "+now.toLocaleDateString();
+            var time = moment().format('hh:mm a, MMMM Do YYYY');
             // store user's last seen time
             User.updateOne({username: userKeyToRemove}, {last_seen: time})
                 .then(()=>{
