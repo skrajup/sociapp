@@ -1,1 +1,0 @@
-web: node --inspect=3000 app.js
