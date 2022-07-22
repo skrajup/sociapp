@@ -5,10 +5,13 @@
         <%- include('partials/messages/success-failure')%>
         
         <% if(posts.length === 0){  %>
-          <h1 style="text-align: center;">Hello <%=user.username%> , your feed is empty.</h1>
-          <p style="text-align: center;">Your feed displays the latest posts from the people you follow. If you don’t have any friends to follow that’s okay; you can use the “Search” feature in the top menu bar to find content written by people with similar interests and then follow them.</p>
+          <h1 style="text-align: center;">Hi <%=user.username%> , your SociApp feed is empty.</h1>
+          <p style="text-align: center;">
+            Your feed is empty because you do not follow any SociApp user or the users you follow have no any posts yet.
+            If the reason is former one, then just use the "Search" feature in the above menu and search for your friends or their posts related something. After you find them, you can follow them to get the access of their posts on right here.
+          </p>
       <% }else{  %>
-        <h2 class="latest-heading">Latest from the people you follow</h2>
+        <h2 class="latest-heading">Latest posts from the people you follow</h2>
         <% posts.sort((post1, post2) => (post1.date > post2.date) ? -1 : 1)%>
         <% posts.forEach(post=>{  %>
             <div class="card">
