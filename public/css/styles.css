@@ -108,7 +108,6 @@ body {
 }
 
 .login-form > div > input {
-    border-radius: 5rem;
     font-size: 15px;
 }
 
@@ -116,7 +115,6 @@ body {
     display: block;
     width: 8rem;
     margin: auto;
-    border-radius: 5rem;
     font-size: 12px;
 }
 
@@ -252,7 +250,6 @@ a {
     margin: 10px 0;
     padding: 10px;
     border: 1px solid #ccc;
-    border-radius: 10px;
     opacity: 1;
     word-break: break-all;
     overflow: hidden;
@@ -306,7 +303,6 @@ a {
     width: 100%;
     padding: 20px 30px;
     border: none;
-    border-radius: 2rem;
     background: rgb(255, 255, 255);
     box-shadow:0.2rem 0.2rem 0.8rem #ccc;
     font-size: 1rem;

@@ -64,6 +64,10 @@ const enterName = () => {
 
     // change my status
     myStatus.textContent = "Your status: active";
+    let p = document.createElement("p");
+    p.setAttribute("style", "font-size: xx-small; margin-bottom: 0;");
+    p.textContent = `You are chatting with username '${username}'.`;
+    myStatus.appendChild(p);
     myStatus.style.backgroundColor = "green";
 
     // disable input and submit fields
