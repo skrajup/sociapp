@@ -4,7 +4,7 @@ social media app made with the help of NodeJS, ExpressJS, MongoDB, Template Engi
 ## Demo 
 **[link](https://bit.ly/3wA4Hqe)**
 
-![barcode](https://github.com/ntstet/sociapp/blob/master/public/images/barcode.png/)
+![barcode](https://github.com/ntstet/sociapp/blob/main/public/images/barcode.png/)
 
 ## Screenshots depicting the product
 
