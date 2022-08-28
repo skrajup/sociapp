@@ -1,6 +1,11 @@
 # sociapp
 social media app made with the help of NodeJS, ExpressJS, MongoDB, Template Engine(ejs) and Socket.IO deployed on heroku... 
 
+## Demo 
+**[link](https://bit.ly/3wA4Hqe)**
+
+![barcode](https://github.com/ntstet/sociapp/blob/master/images/barcode.png/)
+
 ## Screenshots depicting the product
 
 ### Homepage: signin, signup
