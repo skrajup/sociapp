@@ -34,7 +34,7 @@
     "md5": "^2.3.0",
     "moment": "^2.29.4",
     "mongodb": "^4.7.0",
-    "mongoose": "^6.3.6",
+    "mongoose": "^6.5.3",
     "mongoose-findorcreate": "^3.0.0",
     "passport": "^0.6.0",
     "passport-facebook": "^3.0.0",
