@@ -14,3 +14,10 @@ if any message in above condn is unseen and after that messages are seen => user
 -- strange comments are used for just testing async and await
 
 
+
+//git info
+-- remote branch :: main
+-- heroku branch :: master // not used in deployment
+
+
+
