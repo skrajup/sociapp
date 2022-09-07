@@ -91,12 +91,18 @@ const dashboard_search_key_post = (req, res)=>{
     User.find({$text: {$search: key}}, {score: {$meta: "textScore"}}).sort({score: {$meta: "textScore"}})
         .then(users=>{
             usersFound = users;
-            Post.find({$text: {$search: key}}, {score: {$meta: "textScore"}}).sort({score: {$meta: "textScore"}})
+            if(usersFound){
+                Post.find({$text: {$search: key}}, {score: {$meta: "textScore"}}).sort({score: {$meta: "textScore"}})
                 .then(posts=>{
                     // console.log(posts);
                     postsFound = posts;
                     res.redirect("back");
+                }).catch(err=>{
+                    console.log(err);
                 });
+            }  
+        }).catch(err=>{
+            console.log(err);
         });
 }
 
