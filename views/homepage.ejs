@@ -1,71 +1,59 @@
 <%- include('partials/homepage-header') %>
-      <div class="bg">
+    <div class="bg">
       <%- include('partials/messages/success-failure')%>
 
-      <div class="custom-flex">
-        <!-- social login start -->
-        <div class="social-login-flex">
-         
-          <div class="logo">
-            <img src="/images/sociapp_logo.png" alt="sociapp_logo">
-            <h6>SociaApp</h6>
-          </div>
+          <div class="custom-flex">
+            <!-- social login start -->
+                  <div class="social-login-flex">
+                      <div class="logo">
+                        <img src="/images/sociapp_logo.png" alt="sociapp_logo">
+                        <h6>SociaApp</h6>
+                      </div>
 
-           <div>
-            <h6>Login with social networks</h6>
+                      <div>
+                        <h6>Login with social networks</h6>
+                      </div>
+                      <div class="socials-btn-flex">
+                          <div>
+                            <a href="/auth/google">
+                              <i class="fa-brands fa-google socials"  style="background: rgb(205, 0, 0);"></i>
+                            </a>
+                          </div>
+                          <div>
+                            <a href="/auth/facebook">
+                              <i class="fa-brands fa-facebook socials" style="background: rgb(0, 0, 109);"></i>
+                            </a>
+                          </div>
+                          <div>
+                            <a href="/auth/twitter">
+                              <i class="fa-brands fa-twitter socials" style="background: rgb(44, 251, 255);"></i>
+                            </a>
+                          </div>
+                  </div>
           </div>
-        <div>
-          <a class="btn btn-block btn-social btn-google" href="/auth/google" role="button" style="width: 20rem; text-align: center;">
-            <i class="fab fa-google"></i>
-            Login with Google
-          </a>
-        </div>
-        <div>
-          <a class="btn btn-block btn-social btn-facebook" href="/auth/facebook" role="button" style="width: 20rem; text-align: center;">
-            <i class="fab fa-facebook"></i>
-            Login with Facebook
-          </a>
-        </div>
-        <div>
-          <a class="btn btn-block btn-social btn-twitter" href="/auth/twitter" role="button" style="width: 20rem; text-align: center;">
-            <i class="fab fa-twitter"></i>
-            Login with Twitter
-          </a>
-        </div>
-      </div>
-      <!-- social login finish -->
-      <!-- seperator start -->
-      <div class="separator" style="
-          display: flex;
-          justify-content: center;
-      ">
-        <div>-------- </div> <div> OR </div> <div> --------</div>
-      </div>
-      <!-- separator end -->
-
-        <div>
-          <!-- <div class="logo">
-            <img src="/images/sociapp_logo.png" alt="sociapp_logo">
-            <h6>SociaApp</h6>
-          </div> -->
-          <form action="/signup" method="post" class="login-form">
-            <div class="mb-3">
-              <!-- <label for="username" class="form-label">Username</label> -->
-              <input type="text" class="form-control" id="username" name="username" placeholder="username" required>
-              <small></small>
-            </div>
-            <div class="mb-3">
-              <!-- <label for="email" class="form-label">Email address</label> -->
-              <input type="email" class="form-control" id="email" name="email" placeholder="email" required>
-            </div>
-            <div class="mb-3">
-              <!-- <label for="password" class="form-label">Password</label> -->
-              <input type="password" class="form-control" id="password" name="password" placeholder="password" required>
-            </div>
-            
-            <button type="submit" class="btn btn-primary">Sign Up</button>
-          </form>
-        </div>
+          <div class="sign-form">
+                <div class="logo">
+                  <img src="/images/sociapp_logo.png" alt="sociapp_logo">
+                  <h6>SociaApp</h6>
+                </div>
+                <form action="/signup" method="post" class="login-form">
+                      <div class="mb-3">
+                        <!-- <label for="username" class="form-label">Username</label> -->
+                        <input type="text" class="form-control" id="username" name="username" placeholder="username" required>
+                        <small></small>
+                      </div>
+                      <div class="mb-3">
+                        <!-- <label for="email" class="form-label">Email address</label> -->
+                        <input type="email" class="form-control" id="email" name="email" placeholder="email" required>
+                      </div>
+                      <div class="mb-3">
+                        <!-- <label for="password" class="form-label">Password</label> -->
+                        <input type="password" class="form-control" id="password" name="password" placeholder="password" required>
+                      </div>
+                  
+                      <button type="submit" class="btn btn-primary">Sign Up</button>
+                </form>
+          </div>
       </div>
     </div>
       
