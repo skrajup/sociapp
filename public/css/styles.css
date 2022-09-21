@@ -671,6 +671,10 @@ a {
     .wid-80{
         width: 95%;
     }
+
+    .social-login-flex, .sign-form {
+        padding: 30px;
+    }
 }
 
 @media only screen and (max-width: 500px) {
