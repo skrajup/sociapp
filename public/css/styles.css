@@ -373,12 +373,6 @@ a {
 
 
 
-
-
-
-
-
-
 /* chat panel css */
 
 .user-form {
@@ -397,30 +391,34 @@ a {
     flex-wrap: wrap;
     margin: 2rem;
     font-size: 13px;
+    border-radius: 10px;
+    box-shadow: 0.1px 0.2px 1px 1px #ccc;
 }
 
 .users {
     flex-basis: 30%;
     flex-grow: 1;
-    background: #050143;
-    border-right: #07006d 0.3px solid;
+    /* background: #050143; */
+    border-radius: 10px 0 0 10px;
+    box-shadow: 0 1px 2px 0.8px #ccc;
 }
 
 .users > h5 {
     padding: 13px;
     margin-bottom: 0;
-    background: #05004d;
-    color: aliceblue;
+    border-radius: 10px 0 0 0;
+    color: rgb(30, 137, 230);
+    box-shadow: 0px 0.3px 2px 0.8px #ccc;
 }
 
 .online {
-    background: #005703;
-    color: rgb(41, 41, 41);
+    background: #003cbe;
+    color: rgb(255, 255, 255);
 }
 
 .offline {
-    background: rgb(108, 108, 108);
-    color: rgb(214, 214, 214);
+    background: rgb(197, 197, 197);
+    color: rgb(13, 0, 0);
 }
 
 .users > ul {
@@ -436,13 +434,14 @@ a {
     width: 100%;
     padding: 10px;
     text-align: left;
-    color: #ffffff;
-    border-bottom: #94ff84 solid .2px;
-    box-shadow: 0 1px 2px greenyellow;
+    /* color: #ffffff; */
+    /* border-bottom: #94ff84 solid .2px; */
+    /* box-shadow: 0 1px 2px greenyellow; */
+    
 }
 
 .users > ul > li > button:hover {
-    background: rgb(0, 217, 0);
+    background: rgb(219, 219, 219);
     color: #000;
     transition:ease 0.5s;
 }
@@ -453,7 +452,8 @@ a {
 
 .chat-panel {
     flex-basis: 70%;
-    background: #0b0741;
+    /* background: #0b0741; */
+    border-radius: 0 10px 10px 0;
 }
 
 .chat-panel-wrapper {
@@ -472,20 +472,17 @@ a {
     width: 8px;
 }
 
-/* .chat-panel-wrapper::-webkit-scrollbar-track {
-    background:  #62118a;
-} */
-
 .chat-panel-wrapper::-webkit-scrollbar-thumb {
     background: #c9c9c9;
+    border-radius: 10px;
     min-height: 50px;
 }
 
 .panel-head {
-    background: rgb(3, 0, 79);
+    box-shadow: 0.3px 0px 1px 1px #ccc;
+    background: #fff;
     position: sticky;
     top: 0;
-    z-index: 1;
 }
 
 .panel-head-flex {
@@ -502,7 +499,7 @@ a {
 
 .panel-head-flex > div > a {
     text-decoration: none;
-    color: rgb(255, 255, 255);
+    color: rgb(0, 7, 89);
     font-size: larger;
 }
 
@@ -510,7 +507,7 @@ a {
     font-family: 'Roboto', sans-serif;
     font-size: 10px;
     text-transform: lowercase;
-    color: #515151;
+    color: #0c0c0c;
 }
 
 .align-right {
@@ -563,12 +560,12 @@ a {
     text-align: left;
 }
 
-/* .incoming > img {
-    border-radius: 50%;
-} */
-
 .incoming > span {
-    background: #fff;
+    box-shadow: 0px 0.3px 1px 1px #ccc;
+}
+
+.incoming > span:hover {
+    box-shadow: -0.3px -0.1px 1px 1px #ccc;
 }
 
 .outgoing {
@@ -577,7 +574,11 @@ a {
 }
 
 .outgoing > span {
-    background: linear-gradient(to right, #b7ffbc, #d4fff5);
+    box-shadow: 0.5px 0.1px 1px 1px #ccc;
+}
+
+.outgoing > span:hover {
+    box-shadow: -0.5px -0.1px 1px 1px #ccc;
 }
 
 
@@ -600,7 +601,8 @@ a {
 
 .msg-input > input{
     display: block;
-    background: rgb(255, 255, 255);
+    /* background: rgb(255, 255, 255); */
+    box-shadow: 0.3px 0.5px 1px 1px #ccc;
     outline: none;
 }
 
@@ -609,9 +611,12 @@ a {
 }
 
 .send-msg > button{
-    background: #02427d;
+    background: #ffffff;
     font-size: 15px;
-    color: rgb(255, 255, 255);
+    color: rgb(0, 19, 128);
+    border-radius: 0 0 10px 0;
+    box-shadow: 0.3px 0.5px 1px 1px #ccc;
+
 }
 
 .msg-input > input, .send-msg > button {
@@ -622,7 +627,7 @@ a {
 }
 
 .send-msg > button:hover{
-    background: #002242;
+    box-shadow: -0.5px -0.3px 1px 1px #ccc;
 }
 
 /* media queries */

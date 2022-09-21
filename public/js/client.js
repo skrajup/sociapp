@@ -68,7 +68,8 @@ const enterName = () => {
     p.setAttribute("style", "font-size: xx-small; margin-bottom: 0;");
     p.textContent = `You are chatting with username '${username}'.`;
     myStatus.appendChild(p);
-    myStatus.style.backgroundColor = "green";
+    myStatus.style.backgroundColor = "#010866";
+    myStatus.style.color = "#fff";
 
     // disable input and submit fields
     let elements = userForm.elements;

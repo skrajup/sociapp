@@ -3,16 +3,17 @@
     <div class="type-chat-msg">
         <form action="" class="user-form" onsubmit="return enterName();">
             <div class="msg-input">
-                <input type="text" name="username" id="username" value="<%=user.username%>" readonly style="background-image: radial-gradient( circle farthest-corner at 22.4% 21.7%, rgba(4,189,228,1) 0%, rgba(2,83,185,1) 100.2% ); color: #fff;">
+                <input type="text" name="username" id="username" value="<%=user.username%>" readonly style="border-radius: 10px 0 0 10px;">
             </div>
                 
             <div class="send-msg">
-                <button type="submit">ready</button>
+                <button type="submit" style="border-radius: 0 10px 10px 0;">ready</button>
             </div>
         </form>
     </div>
     
     <div class="chat-container">
+        <!-- chat container left part users part -->
         <div class="users">
             <h5>Your status: inactive<p style="font-size: xx-small; margin-bottom: 0;">Press ready button to make youself active</p></h5>
             
@@ -25,6 +26,7 @@
             </ul>
         </div>
 
+        <!-- chat container right part main chat part -->
         <div class="chat-panel">
             <div class="chat-panel-wrapper">
                 <div class="panel-head">
@@ -32,7 +34,7 @@
                         <div class="panel-head-flex-item"><img src="https://static.remove.bg/remove-bg-web/5c20d2ecc9ddb1b6c85540a333ec65e2c616dbbd/assets/start-1abfb4fe2980eabfbbaaa4365a0692539f7cd2725f324f904565a9a744f8e214.jpg" alt="sss" class="round-img-40" style="width: 40px; height: 40px;" ></div>
                         <div class="panel-head-flex-item">
                             <a href="#" id="user">select user to chat</a>
-                            <div id="typing-status" style="color: #ccc; font-size: 10px; text-decoration: italic;"></div>
+                            <div id="typing-status" style="font-size: 10px; text-decoration: italic;"></div>
                         </div>
                         <div class="panel-head-flex-item align-right">
                             <a href=""><i class="fa-solid fa-arrow-rotate-left"></i></a>
