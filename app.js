@@ -6,7 +6,7 @@ const bodyParser = require("body-parser"); // parser middleware
 const flash = require("connect-flash"); // for flash messages
 const session = require("express-session"); // session middleware
 const passport = require("passport");// authentication
-const { GoogleStrategyConfig, FacebookStrategyConfig, TwitterStrategyConfig } = require("./controllers/passportOAuthStrategies");// import login strategies
+const { GoogleStrategyConfig, FacebookStrategyConfig, TwitterStrategyConfig, GithubStrategyConfig, SpotifyStrategyConfig } = require("./controllers/passportOAuthStrategies");// import login strategies
 const User = require("./models/user"); //import User model
 
 // import routes
@@ -68,7 +68,8 @@ passport.deserializeUser(function(id, done) {
 GoogleStrategyConfig();
 FacebookStrategyConfig();
 TwitterStrategyConfig();
-
+GithubStrategyConfig();
+SpotifyStrategyConfig();
 // routes
 app.use("/", homeRoutes);
 app.use("/auth", authenticationRoutes);

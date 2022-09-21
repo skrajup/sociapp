@@ -39,4 +39,31 @@ router.get("/twitter/dashboard",
     }
 );
 
+// github OAuth 1.0
+router.get("/github",
+  passport.authenticate("github", { scope: [ 'user:email' ] }));
+
+router.get("/github/dashboard", 
+    passport.authenticate("github", { failureRedirect: "/" }),
+    function(req, res) {
+        // Successful authentication, redirect home.
+        res.redirect("/dashboard");
+    }
+);
+
+// spotify OAuth 
+router.get("/spotify",
+  passport.authenticate("spotify", {
+    scope: ['ugc-image-upload', 'user-read-email', 'user-read-private']
+  }));
+
+router.get("/spotify/dashboard", 
+    passport.authenticate("spotify", { failureRedirect: "/" }),
+    function(req, res) {
+        // Successful authentication, redirect home.
+        res.redirect("/dashboard");
+    }
+);
+
+
 module.exports = router;

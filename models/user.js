@@ -7,6 +7,8 @@ const userSchema = new mongoose.Schema({
     googleId: {type: String},
     facebookId: {type: String},
     twitterId: {type: String},
+    githubId: {type: String},
+    spotifyId: {type: String},
     provider: {type: String, require: true},
     username: {type: String, minlength: 5},
     email: {type: String, required: true},
