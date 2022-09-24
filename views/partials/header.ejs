@@ -12,38 +12,92 @@
     <link rel="stylesheet" href="css/styles.css">
     
     <title>sociapp</title>
+
+    <style>
+      .custom-header-flex {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        text-align: center;
+        flex-wrap: wrap;
+        padding: 5px 10px;
+        box-shadow: 0 1.5px 1px #ccc;
+        background: linear-gradient(170deg, rgb(243, 243, 243) 50%, rgb(255, 255, 255) 50%);
+      }
+      .header-left-flex {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        gap: 10px;
+      }
+      .header-right-flex {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .left-logo > img {
+        width: 40px;
+      }
+      :is(.item1-search, .item2-chat) > a {
+        color: rgb(0, 0, 0);
+      }
+    </style>
   </head>
   <body>  
     <div class="custom-container">
-        <!-- header -->
-      <nav class="navbar navbar-dark bg-dark">
-        <div class="container-fluid">
-          <!-- <a href="/dashboard" class="navbar-brand">SociApp</a> -->
-          <div class="logo navbar-brand mb-0">
+      <!-- header -->
+      <!-- custom navbar -->
+      <!-- flex container -->
+      <div class="custom-header-flex">
+
+        <!-- left flex container -->
+        <div class="header-left-flex">
+          <div class="left-logo">
             <img src="/images/sociapp_logo.png" alt="sociapp_logo">
           </div>
-          <div>
-            <a class="navbar-brand app-name-stylish" href="/dashboard">SociApp</a>
+          <div class="right-brand">
+            <a class="app-name-stylish" href="/dashboard">SociApp</a>
           </div>
-          <!-- d-md-flex justify-content-md-end d-grid-->
-          <div class=" gap-2  custom-menu-bar ">
-            <a href="/dashboard/search" class="btn btn-link me-md-2" type="button" title="search">
-              <i class="fa-brands fa-searchengin" style="color: #fff; font-size: x-large;"></i>
+        </div>
+
+        <!-- right flex container -->
+        <div class="header-right-flex">
+
+          <div class="item1-search">
+            <a href="/dashboard/search" class="me-md-2" type="button" title="search">
+              <i class="fa-solid fa-magnifying-glass" style="font-size: x-large; vertical-align: middle;"></i>
             </a>
-            <a href="/dashboard/chat" class="btn btn-link me-md-2" type="button" title="chat">
-              <i class="fa-regular fa-comments" style="color: #fff; font-size: x-large;"></i>
+          </div>
+
+          <div class="item2-chat">
+            <a href="/dashboard/chat" class="me-md-2" type="button" title="chat">
+              <i class="fa-regular fa-message" style="font-size: x-large; vertical-align: middle;"></i>
             </a>
-            <a href="/dashboard/profile" class="btn btn-link me-md-2" type="button" style="padding: 0;" title="profile"  style="color: #fff;">
+          </div>
+
+          <div class="item3-profile">
+            <a href="/dashboard/profile" class="me-md-2" type="button" style="padding: 0;" title="profile">
               <% if(user.profilePic){ %>
-                <img class="profile-img" src="<%=user.profilePic%>" style="height: 35px; width: 35px;" alt="user-img">
+                <img class="profile-img" src="<%=user.profilePic%>" style="width: 40px;" alt="user-img">
               <% }else{ %>
                 <img class="profile-img" src="//www.gravatar.com/avatar/<%=user.emailHash%>?d=retro&s=35" alt="user-img">
               <% } %>
             </a>
-            <!-- <i class="fa fa-user" aria-hidden="true"></i> -->
-            <a href="/dashboard/create" class="btn btn-success me-md-2" type="button">Create post</a>
-            <a href="/sign-out" class="btn btn-danger" type="button">Sign Out</a>
           </div>
+
+          <div class="item4-create-post">
+            <a href="/dashboard/create" class="custom-btn blue-custom-btn me-md-2" type="button">Create post</a>
+          </div>
+
+          <div class="item5-sign-out">
+            <a href="/sign-out" class="custom-btn red-custom-btn" type="button">Sign Out</a>
+          </div>
+
         </div>
-      </nav>
+
+      </div>
+
+
       

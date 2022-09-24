@@ -16,17 +16,55 @@
         color: #fff;
         border-radius: 5px;
       }
+
+      .custom-header-flex {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        text-align: center;
+        flex-wrap: wrap;
+        padding: 5px 10px;
+        box-shadow: 0 1.5px 1px #ccc;
+        background: linear-gradient(170deg, rgb(243, 243, 243) 50%, rgb(255, 255, 255) 50%);
+      }
+      .header-left-flex {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        gap: 10px;
+      }
+      .header-right-flex {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .left-logo > img {
+        width: 40px;
+      }
+      
     </style>
   </head>
   <body>
     <!-- header -->
     <div class="custom-container">
-      <nav class="navbar navbar-dark bg-dark">
-        <div class="container-fluid">
-          <div class="logo navbar-brand mb-0">
+       <!-- custom navbar -->
+      <!-- flex container -->
+      <div class="custom-header-flex">
+
+        <!-- left flex container -->
+        <div class="header-left-flex">
+          <div class="left-logo">
             <img src="/images/sociapp_logo.png" alt="sociapp_logo">
-            </div>
-          <a class="navbar-brand app-name-stylish">SociApp</a>
+          </div>
+          <div class="right-brand">
+            <a class="app-name-stylish" href="/dashboard">SociApp</a>
+          </div>
+        </div>
+
+        <!-- right flex container -->
+        <div class="header-right-flex">
           <form class="flex" action="/signin" method="post">
             <div class="row">
               <div class="col">
@@ -36,9 +74,9 @@
                 <input type="password" id="password" name="password" class="form-control" placeholder="password" required>
               </div>
               <div class="col">
-                <button class="btn btn-primary" type="submit">Sign In</button>
+                <button class="custom-btn blue-custom-btn" type="submit">Sign In</button>
               </div>
             </div>
           </form>
         </div>
-      </nav>
+      </div>
