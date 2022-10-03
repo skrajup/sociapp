@@ -15,6 +15,7 @@ const authenticationRoutes = require("./routes/authenticationRoutes");
 const dashboardRoutes = require("./routes/dashboardRoutes");
 const postRoutes = require("./routes/postRoutes");
 const userRoutes = require("./routes/userRoutes");
+const devRoutes = require("./routes/devRoutes");
 const configSocketServer = require("./socketIO/socket_server");
 
 // express app
@@ -76,6 +77,7 @@ app.use("/auth", authenticationRoutes);
 app.use("/dashboard", dashboardRoutes);
 app.use("/posts", postRoutes);
 app.use("/users", userRoutes);
+app.use("/dev", devRoutes);
 
 // configure socket on server side
 configSocketServer(http);

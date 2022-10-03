@@ -1,0 +1,30 @@
+<div class="dev-contact-form-container">
+
+    <div class="dev-contact-form">
+        <div class="dev-contact-header">
+            <div>
+            <h3>Mail Us</h3>
+            </div>
+            <div>
+            <!-- <i class="fa-regular fa-rectangle-xmark" ></i> -->
+            <h4 style="color: rgb(193, 0, 0); cursor: pointer; text-decoration: underline;" onclick="closeDevContactForm()">close</h4>
+            </div>
+        </div>
+        <form action="/dev/send_to_dev" method="post">
+            <div class="mb-3">
+            <label for="sender_name_dev" class="form-label">Your Name</label>
+            <input type="text" class="form-control" name="sender_name_dev" placeholder="your full name" minlength="3">
+            </div>
+            <div class="mb-3">
+            <label for="sender_mail_dev" class="form-label">Your Email</label>
+            <input type="email" class="form-control" name="sender_mail_dev" placeholder="your email address">
+            </div>
+            <div class="mb-3">
+            <label for="sender_msg_dev" class="form-label">Your Message</label>
+            <textarea name="sender_msg_dev" class="form-control" cols="30" rows="5" placeholder="your message to developer" minlength="15"></textarea>
+            </div>
+            <button type="submit" class="custom-btn blue-custom-btn send-to-dev-btn">send to us</button>
+        </form>
+    </div>
+
+</div>

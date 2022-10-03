@@ -1,7 +1,7 @@
 const User = require("../models/user"); //User model
 const passport = require("passport");// authentication
 const md5 = require("md5");// for gravatar's email hash generation
-
+const transport = require("../controllers/devControllers").transport;
 
 const home_index = (req, res)=>{
     // console.log("authnticated: "+req.isAuthenticated());
@@ -46,8 +46,22 @@ const signup = (req, res)=>{
         }
 
         passport.authenticate("local")(req, res, function () {  
-            req.flash("successMsg", "You have been successfully signed in.")
-            res.redirect("/dashboard");
+            req.flash("successMsg", "You have been successfully signed in.");
+            const mailOptions = {
+                from: "SociApp Dev<devquartz3152@gmail.com>",
+                to: req.body.email,
+                subject: "Congratulations for creating SociApp account...",
+                text: "Congratulations " + req.body.username + " for creating your brand new SociApp account. SociApp Developer wishes you for good experience with SociApp.",
+                html: `<div><h2>Congratulations ${req.body.username}</h2><p>For creating your brand new SociApp account. </p><p>SociApp Developer wishes you for good experience with sociapp.</p><p>For more enquiry <a href='mailto:devquartz3152@gmail.com'>mail us</a></p><br><br><h5>Regards</h5><p>SociApp Developer<br>India</p></div>`
+            };
+
+            transport.sendMail(mailOptions).then(info=>{
+                // console.log(info);
+                res.redirect("/dashboard");
+            }).catch(err=>{
+                console.log(err);
+                res.redirect("/dashboard");
+            });
         });
     });
 }
