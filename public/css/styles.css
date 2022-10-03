@@ -709,6 +709,10 @@ a {
     .custom-menu-bar {
         flex-basis: 100%;
     }
+
+    .dev-contact-form-container {
+        width: 70%;
+    }
 }
 
 /* media queries */
@@ -753,5 +757,9 @@ a {
     .footer {
         flex-direction: column;
         justify-content: space-evenly;
+    }
+
+    .dev-contact-form-container {
+        width: 90%;
     }
 }
