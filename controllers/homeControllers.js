@@ -66,10 +66,15 @@ const signup = (req, res)=>{
     });
 }
 
+const reset_password = (req, res) => {
+    res.render("reset_password.ejs");
+}
+
 module.exports = {
     home_index,
     privacy_page,
     error_page,
     signout,
-    signup
+    signup,
+    reset_password
 }

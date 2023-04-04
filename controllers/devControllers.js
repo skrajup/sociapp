@@ -17,23 +17,26 @@ const send__to__dev__post = (req, res) => {
     const message = req.body.sender_msg_dev;
     if(name.length == 0 || email.length == 0 || message.length <= 15){
         req.flash("errorMsg", "fill required fields!!!");
-        req.redirect("back");
+        res.redirect("back");
+    }else{
+        const sender = name + '['+email+']' + '<' + master_mail + '>';
+        const mailOptions = {
+            from: sender,
+            to: master_mail,
+            subject: `Message from ${name}`,
+            text: message
+        };
+    
+        transport.sendMail(mailOptions).then(info=>{
+            console.log(info);
+            req.flash("successMsg", "msg sent to dev");
+            res.redirect("back");
+        }).catch(err=>{
+            console.log(err);
+            req.flash("errorMsg", "something went wrong");
+            res.redirect("back");
+        });
     }
-    const sender = name + '['+email+']' + '<' + master_mail + '>';
-    const mailOptions = {
-        from: sender,
-        to: master_mail,
-        subject: `Message from ${name}`,
-        text: message
-    };
-
-    transport.sendMail(mailOptions).then(info=>{
-        console.log(info);
-        res.redirect("back");
-    }).catch(err=>{
-        console.log(err);
-        res.redirect("back");
-    });
 }
 
 module.exports = { send__to__dev__post, transport };

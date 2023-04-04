@@ -9,10 +9,12 @@ if any message in above condn is unseen and after that messages are seen => user
 
 
 // learning
--- best use of async await on dashboard follwing posts fetching
+-- best use of async await on dashboard following posts fetching
 -- see dashboardController.js the controller dashboard_index: i learned the use of async and await
 -- strange comments are used for just testing async and await
 
+-- sessions vs jwt
+    -- https://www.youtube.com/watch?v=7Q17ubqLfaM
 
 
 //git info

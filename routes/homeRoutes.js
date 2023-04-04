@@ -7,6 +7,7 @@ router.get("/", homeControllers.home_index);
 router.get("/T&C", homeControllers.privacy_page);
 router.get("/404", homeControllers.error_page);
 router.get("/sign-out", homeControllers.signout);
+router.get("/reset_password", homeControllers.reset_password);
 router.post("/signup", homeControllers.signup);
 router.post("/signin", passport.authenticate("local", { successReturnToOrRedirect: "/dashboard", failureRedirect: "/"}));
 

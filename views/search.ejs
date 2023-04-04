@@ -18,7 +18,7 @@
                                 <% if(matchedUser.profilePic){ %>
                                     <img class="profile-img" src="<%=matchedUser.profilePic%>" style="height: 35px; width: 35px;" alt="user-img">
                                   <% }else{ %>
-                                    <img class="profile-img" src="//www.gravatar.com/avatar/<%=matchedUser.emailHash%>?d=retro&s=35" alt="user-img">
+                                    <img class="profile-img" src="//www.gravatar.com/avatar/<%=matchedUser.emailHash%>?s=35" alt="user-img">
                                   <% } %>
                             </div>
                             <div><a href="/users/<%=matchedUser.id%>"><%=matchedUser.username%></a></div>

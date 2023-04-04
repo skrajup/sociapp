@@ -9,7 +9,7 @@
           <% if(foundUser.profilePic){ %>
             <img class="profile-img" src="<%=foundUser.profilePic%>" style="height: 60px; width: 60px;" alt="user-img">
           <% }else{ %>
-            <img class="profile-img" src="//www.gravatar.com/avatar/<%=foundUser.emailHash%>?d=retro&s=60" alt="user-img">
+            <img class="profile-img" src="//www.gravatar.com/avatar/<%=foundUser.emailHash%>?s=60" alt="user-img">
           <% } %>
            <%=foundUser.username%></h1>
         <!-- <i class="fa fa-user" aria-hidden="true"></i> -->
