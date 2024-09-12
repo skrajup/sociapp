@@ -167,7 +167,7 @@ function GithubStrategyConfig() {
     passport.use(new GithubStrategy({
         clientID: process.env.GITHUB_CLIENT_ID,
         clientSecret: process.env.GITHUB_CLIENT_SECRET,
-        callbackURL: "http://localhost:3000/auth/github/dashboard/"
+        callbackURL: "http://127.0.0.1:3000/auth/github/dashboard/"
     },
     function verify(accessToken, refreshToken, profile, cb) {
         User.findOne({ githubId: profile.id})  // find user using googleId
